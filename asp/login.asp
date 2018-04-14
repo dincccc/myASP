@@ -6,7 +6,6 @@
 <title>登录界面</title>
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/login_common.css">
-
 </head>
 <body>
 <div class="container">

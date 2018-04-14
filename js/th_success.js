@@ -36,23 +36,53 @@ $(".table td").not(".lesson").click(function(){
 	var ap_week_v=ap.week_v;			/*周次value值*/
 
 	isChoose(ap_week_v,ap_address_v
-		,function(){aside_data(ap_week_v,ap_address_v,x,y)}
+		,function(){aside_data(ap_week_v,ap_address_h,x,y)}
 		,function(){dialog("请选择周次！")}
 		,function(){dialog("请选择实验室！")});
 	}
-})
 
-/*申请按钮绑定事件：传送数据给asp并向数据库插入数据*/
+	/*申请按钮绑定事件：传送数据给asp并向数据库插入数据*/
 $("#apply").click(function(){
 	getDate();/*申请日期*/
-	console.log(now);
+	var th_id=$(".ap_id").html();
+	var apl_address=ap_address_h;		/*地址html值*/
+	var apl_week=ap_week_v;			/*week value值*/
+	var apl_day=x;			/*day value值*/
+	var apl_lesson=y;			/*lesson value值*/
+	var apl_capacity=$("#ap_students").val(); /*申请容量*/
+	var apl_reason=$("#ap_reason").val();	/*申请原因*/
+	console.table({
+			"week": apl_week,
+			"day": apl_day,
+			"lesson": apl_lesson,
+			"capacity": apl_capacity,
+			"reason": apl_reason,
+			"address": apl_address,
+			"th_id": th_id,
+			"now": now,
+		});
 
-	
-	$.ajax("search2.asp?now="+now)
-	.done(function(data){
-		console.log("finsh");
+	$.ajax({
+		url:  'asp/apply.asp',
+		type: 'GET',
+		data: {
+			"week": apl_week,
+			"day": apl_day,
+			"lesson": apl_lesson,
+			"capacity": apl_capacity,
+			"reason": apl_reason,
+			"address": apl_address,
+			"th_id": th_id,
+			"now": now,
+		},
 	})
-	.fail(function(xhr,status,data) {
-    console.log(xhr.status+","+status);
+	.done(function() {
+		dialog("申请发出，请等待审核");
 	})
+	.fail(function() {
+		dialog("申请出错");
+	});
 })
+
+})
+

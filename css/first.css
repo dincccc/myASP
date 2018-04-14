@@ -144,6 +144,8 @@ nav{
 }
 .table td,
 .table th{
+	width: 100px;
+	height: 40px;
 	border: 1px solid #a7a7a7;
 	text-align: center;
 }

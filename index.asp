@@ -93,10 +93,11 @@ next
 		<div><span>课时：</span><span class="ap_lesson"></span></div>
 		<div><span>实验室：</span><span class="ap_address"></span></div>
 		<div><span>实验室容量：</span><span class="ap_capacity"></span></div>
-		<div><span>人数：</span><input type="text" id="ap_students"></div>
+		<div><span>人数：</span><input type="number" min="1" max="200" id="ap_students"></div>
 		<div><span>申请原因：</span><input type="text" id="ap_reason"></div>
-		<span>申请人:<%=th_name%></span>
-		<span>申请日期：<%=now()%></span>
+		<div><span>申请人:</span><span class="ap_name"><%=th_name%></span></div>
+		<div><span>申请人ID:</span><span class="ap_id"><%=th_id%></span></div>
+		<div><span>申请日期：</span><span class="ap_time"><%=now()%></span></div>
 		<button type="button" id="apply">申请</button>
 		<button type="button" id="ap_exit">退出</button>
 	</div>

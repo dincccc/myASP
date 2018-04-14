@@ -4,7 +4,7 @@
 ' 查询booking_record数据
 address=request.QueryString("address")
 week=request.QueryString("week")
-sql2="SELECT bk_day,bk_lesson,class,bk_reason,th_id FROM booking_record WHERE lab_address='"&address&"' and bk_week='"&week&"'"
+sql2="SELECT bk_day,bk_lesson,class,bk_reason,th_id FROM booking_record WHERE bk_re_status='1' and lab_address='"&address&"' and bk_week='"&week&"'"
 set rs2=conn.execute(sql2)
 arr=rs2.getrows()
 recN=UBound(arr,2)
@@ -25,11 +25,4 @@ Response.write("]")
 ' else 
 ' Response.write("search nothing！")
 ' end if
-
-
-' 插入booking_record数据
-' ap_now=request.QueryString("now")
-' sql="INSERT INTO `booking_record` (`date`) VALUES ('"&ap_now&"')"  '多个数据'
-' Response.write("ap_now")
-' set rs=conn.execute(sql)
 %>

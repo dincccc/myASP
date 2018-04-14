@@ -75,14 +75,6 @@ function login(url,target_href,remember){
 }*/
 
 
-
-
-
-
-
-
-
-
 /*var loginname=document.getElementById('username');
 var loginpass=document.getElementById('password');
 sub.onclick=function(){
