@@ -22,8 +22,11 @@
 	,function(){dialog("请选择实验室！")});
 });*/
 $(".table td").not(".lesson").click(function(){
-	/*$(this).html();*/
-
+	var contant=$(this).html();
+	if(contant!=""){
+		dialog("不能预约")
+	}
+	else{
 	var x=$(this).attr("value");			/*td的value值*/
 	var y=$(this).parent().attr("value");	/*tr的value值*/
 
@@ -36,6 +39,7 @@ $(".table td").not(".lesson").click(function(){
 		,function(){aside_data(ap_week_v,ap_address_v,x,y)}
 		,function(){dialog("请选择周次！")}
 		,function(){dialog("请选择实验室！")});
+	}
 })
 
 /*申请按钮绑定事件：传送数据给asp并向数据库插入数据*/

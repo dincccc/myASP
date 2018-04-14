@@ -15,9 +15,20 @@
 
 		console.table("lab_type:"+lab_type+"lab_address:"+se_address_h+"week_list:"+se_week);
 
+		$(".table td").not(".lesson").html("");
 		$.ajax("search2.asp?address="+se_address_h+"&week="+se_week)
 		.done(function(data){
-			console.log(data);
+			console.table(data);
+/*			var record={record0:{'bk_day' : '2','bk_lesson' : '3','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},record1:{'bk_day' : '2','bk_lesson' : '4','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},record2:{'bk_day' : '2','bk_lesson' : '5','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},};*/
+			var record=eval("("+data+")");
+			$.each(record,function(i,obj){
+				console.table(i+":"+obj.th_id);
+				searchGet(obj.bk_day,obj.bk_lesson,obj.class,obj.bk_reason,obj.th_id);
+			})
+/*			{record0:{'bk_day' : '2','bk_lesson' : '3','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},record1:{'bk_day' : '2','bk_lesson' : '4','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},record2:{'bk_day' : '2','bk_lesson' : '5','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},}*/
+
+/*			searchGet(x,y,th_class,bk_reason,bk_by);*/
+
 		})/*获取实验室占用情况数据*/
 
 		isChoose(se_week,se_address_v
@@ -146,6 +157,7 @@
 	}
 	/*x=td[value],y=tr[value]*/
 	function searchGet(x,y,th_class,bk_reason,bk_by){
+
 		$("tr[value="+y+"] td[value="+x+"]")
-		.html("班级："+th_class+ "占用原因："+bk_reason+"预约人："+bk_by);
+		.html("班级："+th_class+"</br>"+ "占用原因："+bk_reason+"</br>"+"预约人："+bk_by+"</br>");
 	}
