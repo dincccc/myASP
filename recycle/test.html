@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FLEX</title>
+	<style>
+		.box{
+			display: flex;
+/* 			justify-content: center;
+align-items: center; */
+		}
+		.box-cell{
+			padding: 10px;
+			border: 1px solid #ccc;
+			flex: 1;
+		}
+		.cell-1of1{
+			flex: 0 1 10%;
+		}
+		.cell-1of2{
+			flex: 0 1 30%;
+		}
+		.cell-1of3{
+			flex: 0 1 40%;
+		}
+		.cell-1of4{
+			flex: 0 1 20%;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="box-cell cell-1of1">1</div>
+		<div class="box-cell cell-1of2">2</div>
+		<div class="box-cell cell-1of3">3</div>
+		<div class="box-cell cell-1of4">4</div>
+	</div>
+</body>
+</html>
+

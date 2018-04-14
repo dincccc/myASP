@@ -1,0 +1,177 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+}
+li{
+	list-style: none;
+}
+.clearfix:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+body{
+	background: #fff;
+}
+.container{
+	width: 86%;
+/* 	border: 1px solid #00b6dd; */
+	margin: 100px auto;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.box-info{
+	color: #696969;
+	width: 22%;
+	height: 580px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	display: flex;
+	flex-direction: column;
+}
+.info-title{
+	font-size: 18px;
+	font-weight: 600;
+}
+.info-table p{
+	display: flex;
+	justify-content: center;
+} 
+.info-table p span{
+	width: 100%;
+	border: 1px solid #ccc;
+	border-right: 0;
+	border-left: 0;
+	padding: 4px 6px;
+	margin-top: 10px;
+
+}
+
+/* 按钮组 */
+.control-g{
+	margin-top: 30px;
+	display: flex;
+	justify-content: space-between;
+}
+.control-g li,.confirm-ch,.booking-exit{
+	border: 1px solid #fff;
+	border-radius: 4px;	
+	padding: 6px;
+	background: #868889;
+	cursor: pointer;
+}
+.control-g li:active,.confirm-ch:active{
+	background: #666;
+	transition: 200ms all linear;
+}
+.control-g li:nth-child(3){
+	display: none;
+}
+
+/*修改密码*/
+.pwd-change{
+	margin-top: 40px;
+	display: none;
+}
+.pc-box{
+	display: flex;
+	flex-direction: column;
+}
+.pc-box input{
+	width: 100%;
+	height: 28px;
+    font-size: 14px;
+    line-height: 1.6em;
+    text-indent: 10px;
+    border: 1px solid #e4dddd;
+    border-radius: 4px;
+    margin-top: 2px;
+}
+.pc-box input:focus{
+	border-color: #14ead3;
+}
+.pc-box label{
+    cursor: pointer;
+}
+
+.confirm-ch{
+	text-align: center;
+	display: block;
+	margin-top: 16px;
+	border-radius: 6px;
+}
+
+/* 预约记录 */
+.box-booking{
+	width: 78%;
+	height: 580px;
+	padding: 0 10px;
+/* 	border: 1px solid #11b3ff; */
+	text-align: center;
+	align-self: flex-start;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.booking-record {
+	width: 100%;
+	color: #717171;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.tb_title{
+	color: #717171;
+	font-size: 1.5em;
+	font-weight: 600;
+}
+.booking-record tr th,
+.booking-record tr td,
+.title{
+
+	border: 1px solid #b5b5b5;
+}
+.booking-record tr th,.booking-record tr td{
+/* 	text-align: center; */
+}
+
+/* 撤销/删除图标 */
+.delete,.reply{
+	font-size: 18px;
+	cursor: pointer;
+}
+.delete{
+	color: red;
+}
+.delete:active,.reply:active{
+	font-size: 16px;
+}
+
+
+/* 返回按钮 */
+
+.booking-exit{
+	color: #fff;
+	font-size: 30px;
+	font-weight: 600;
+	padding: 40px;
+	background: #10a1ea;
+	border: 0;
+	align-self: flex-end;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;	
+
+	box-shadow: 2px 4px 8px #1287c2;		
+}
+.booking-exit:active{
+	background: #1287c2;
+	transition: 200ms all linear;
+}
