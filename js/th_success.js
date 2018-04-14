@@ -51,7 +51,7 @@ $("#apply").click(function(){
 	var apl_lesson=y;			/*lesson value值*/
 	var apl_capacity=$("#ap_students").val(); /*申请容量*/
 	var apl_reason=$("#ap_reason").val();	/*申请原因*/
-	console.table({
+/*	console.table({
 			"week": apl_week,
 			"day": apl_day,
 			"lesson": apl_lesson,
@@ -60,7 +60,7 @@ $("#apply").click(function(){
 			"address": apl_address,
 			"th_id": th_id,
 			"now": now,
-		});
+		});*/
 
 	$.ajax({
 		url:  'asp/apply.asp',
@@ -76,8 +76,8 @@ $("#apply").click(function(){
 			"now": now,
 		},
 	})
-	.done(function() {
-		dialog("申请发出，请等待审核");
+	.done(function(data) {
+		dialog(data);
 	})
 	.fail(function() {
 		dialog("申请出错");
