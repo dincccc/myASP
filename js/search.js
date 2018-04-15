@@ -49,28 +49,35 @@
 		for(var i=1;i<labtypeops.length;i++){
 			(function(index){
 				labtypeops[index].onclick=function(){
-				$.ajax("search.asp?labtypeid="+index)
-					.done(function(data){
-							createAddress(data);
+					$.ajax("search.asp?labtypeid="+index)
+						.done(function(data){
+							var arr=eval("("+data+")");
+							createAddress(arr)
 						})
 					}
 			})(i)
 		}
 	}
 	/*创建实验室地址option*/
-	function createAddress(text){
+	function createAddress(arr){
 		var labad=document.getElementById("lab-address");
 		var labops=labad.getElementsByTagName("option");
-		if(text.length==0){
+		if(arr==""){
 			console.log("none");
 		}else{
-			var arr=text.split(" ");
 			labad.options.length=1;		//每次运行之前确保options只有一个。防止累加。
-			for(var i=0;i<arr.length-1;i++){
+			for(var i=0;i<arr.length;i++){
 				var op=document.createElement("option");
-				op.innerHTML=arr[i];
-				op.value=i+1;
-				labad.append(op);
+				for(var key in arr[i]){
+					op.innerHTML=key;
+					op.value=i+1;
+					(function(i,key){
+						op.onclick=function(){
+							$(".ap_capacity").html(arr[i][key]);
+						}	
+					})(i,key)
+				}
+				labad.append(op);	
 			}
 		}
 	}

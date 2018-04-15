@@ -51,7 +51,7 @@ end if
 		</div>
 		<ul class="control-g">
 			<li><a class="keep-pwd" href="javascript:;">修改密码</a></li>
-			<li><a calss="change-infp" href="javascript:;">修改信息</a></li>
+			<li><a class="change-info" href="javascript:;">修改信息</a></li>
 			<li><a class="save" href="javascript:;">保存</a></li>
 		</ul>
 		<div class="pwd-change clearfix">
@@ -62,11 +62,18 @@ end if
 			</div>
 			<a class="confirm-ch" href="javascript:;">确认</a>
 		</div>
+		<div class="info-change clearfix">
+			<div class="pc-box">
+				<div class="phone-new"><label for="phone-new">新号码:</label><input id="phone-new" type="text"></div>
+				<div class="mail-new"><label for="mail-new">新邮箱:</label><input id="mail-new" type="email"></div>
+			</div>
+			<a class="confirm-ch" href="javascript:;">确认</a>
+		</div>		
 		
 	</div>
 	<div class="box-booking">
 		<table class="booking-record">
-			<tr><th colspan="9" class="tb_title">预约记录</th></tr>
+			<tr><th colspan="10" class="tb_title">预约记录</th></tr>
 			<tr>
 				<th>序号</th>
 				<th>周次</th>
@@ -75,11 +82,12 @@ end if
 				<th>教室</th>
 				<th>预约原因</th>
 				<th>预约状态</th>
+				<th>预约时间</th>
 				<th>撤销</th>
 				<th>删除</th>
 			</tr>
 <%
-sql_record="SELECT bk_re_id,bk_re_status,bk_week,bk_day,bk_lesson,bk_reason,lab_address FROM booking_record WHERE th_id="&id
+sql_record="SELECT bk_re_id,bk_re_status,bk_week,bk_day,bk_lesson,bk_reason,lab_address,bk_date FROM booking_record WHERE th_id="&id
 set re=conn.execute(sql_record)
 do until re.eof
   	num=re.Fields(0).value
@@ -99,14 +107,16 @@ do until re.eof
 	end if
 	end if
 
+	b_time=re.Fields(7).value
+
 	'set rl=conn.execute("SELECT lab_address FROM lab_info WHERE lab_id="&lab_id)
 	'lab=rl("lab_address")
 
-  	Response.Write("<tr><td>"&num&"</td><td>"&week&"</td><td>"&d_day&"</td><td>"&lesson&"</td><td>"&lab_address&"</td><td>"&reason&"</td><td class='status'>"&status&"</td><td><i class='fa fa-reply reply'></i></td><td><i class='fa fa-minus-circle delete'></i></td></tr>")
+  	Response.Write("<tr><td>"&num&"</td><td>"&week&"</td><td>"&d_day&"</td><td>"&lesson&"</td><td>"&lab_address&"</td><td>"&reason&"</td><td class='status'>"&status&"</td><td>"&b_time&"</td><td><i class='fa fa-reply reply'></i></td><td><i class='fa fa-minus-circle delete'></i></td></tr>")
   re.MoveNext
 loop
 %>	
-		<tr><td colspan="9"><span>.......</span></td></tr>
+		<tr><td colspan="10"><span>.......</span></td></tr>
 		</table>
 		<div class="booking-exit">返回预约 <i class="fa fa-sign-out"></i></div>
 	</div>

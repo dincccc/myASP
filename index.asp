@@ -61,6 +61,7 @@ response.write("<option value='"&i&"'>第"&i&"周</option>")
 next
 %>
 	</select>
+	<div class="lab_capacity"><span>容量：</span><span class="ap_capacity"></span></div>
 	<button class="search" id="search"><i class="fa fa-search"></i>&nbsp;查询</button>
 </section>
 <table class="table">
@@ -84,7 +85,6 @@ next
 <footer><!-- 页脚 -->
 	<span>@Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
 </footer>
-
 <aside id="applypanel"><!-- 预约信息面板 -->
 	<h1>预约申请</h1>
 	<div class="apply-box">

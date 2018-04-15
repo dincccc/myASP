@@ -90,6 +90,14 @@ nav{
 	font-size: 14px;
 	width: 94px;
 }
+.lab_capacity{
+	width: 80px;
+	color: #fff;
+	padding: 5px 2px;
+	border: 1px solid #fff;
+	margin-right: 40px;
+	border-radius: 4px;
+}
 /* #lab-type:focus,#lab-address:focus{
 	outline: 1px solid #d44d44;
 } */

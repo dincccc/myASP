@@ -35,54 +35,55 @@ $(".table td").not(".lesson").click(function(){
 	var ap_address_v=ap.address_v;		/*地址value值*/
 	var ap_week_v=ap.week_v;			/*周次value值*/
 
+
 	isChoose(ap_week_v,ap_address_v
-		,function(){aside_data(ap_week_v,ap_address_h,x,y)}
+		,function(){aside_data(ap_week_v,ap_address_h,x,y);apply_c();}
 		,function(){dialog("请选择周次！")}
 		,function(){dialog("请选择实验室！")});
 	}
 
 	/*申请按钮绑定事件：传送数据给asp并向数据库插入数据*/
-$("#apply").click(function(){
-	getDate();/*申请日期*/
-	var th_id=$(".ap_id").html();
-	var apl_address=ap_address_h;		/*地址html值*/
-	var apl_week=ap_week_v;			/*week value值*/
-	var apl_day=x;			/*day value值*/
-	var apl_lesson=y;			/*lesson value值*/
-	var apl_capacity=$("#ap_students").val(); /*申请容量*/
-	var apl_reason=$("#ap_reason").val();	/*申请原因*/
-/*	console.table({
-			"week": apl_week,
-			"day": apl_day,
-			"lesson": apl_lesson,
-			"capacity": apl_capacity,
-			"reason": apl_reason,
-			"address": apl_address,
-			"th_id": th_id,
-			"now": now,
-		});*/
-
-	$.ajax({
-		url:  'asp/apply.asp',
-		type: 'GET',
-		data: {
-			"week": apl_week,
-			"day": apl_day,
-			"lesson": apl_lesson,
-			"capacity": apl_capacity,
-			"reason": apl_reason,
-			"address": apl_address,
-			"th_id": th_id,
-			"now": now,
-		},
-	})
-	.done(function(data) {
-		dialog(data);
-	})
-	.fail(function() {
-		dialog("申请出错");
-	});
-})
-
+	function apply_c(){
+		$("#apply").click(function(){
+			getDate();/*申请日期*/
+			var th_id=$(".ap_id").html();
+			var apl_address=ap_address_h;		/*地址html值*/
+			var apl_week=ap_week_v;			/*week value值*/
+			var apl_day=x;			/*day value值*/
+			var apl_lesson=y;			/*lesson value值*/
+			var apl_capacity=$("#ap_students").val(); /*申请容量*/
+			var true_capacity=$(".ap_capacity").html(); /*实验室容量*/
+			var apl_reason=$("#ap_reason").val();	/*申请原因*/
+			if(apl_capacity==""||apl_reason=="")/*判断是否有空*/
+			{
+				dialog("请保证信息填写完整！");
+			}else if(parseInt(apl_capacity)>parseInt(true_capacity))
+			{
+				dialog("容量超出，请选择合适的实验室！");
+			}
+			else{
+				$.ajax({
+					url:  'asp/apply.asp',
+					type: 'GET',
+					data: {
+						"week": apl_week,
+						"day": apl_day,
+						"lesson": apl_lesson,
+						"capacity": apl_capacity,
+						"reason": apl_reason,
+						"address": apl_address,
+						"th_id": th_id,
+						"now": now,
+					},
+				})
+				.done(function(data) {
+					dialog(data);
+				})
+				.fail(function() {
+					dialog("申请出错");
+				});
+			}
+		})
+	}
 })
 

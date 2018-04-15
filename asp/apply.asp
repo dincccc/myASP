@@ -19,6 +19,6 @@ if rs1.eof then
 	set rs2=conn.execute(sql1&sql2)
 	Response.write("申请发出，请等待审核")
 else 
-Response.write("申请重复！")
+Response.write("申请重复！（或已经有人申请了。）")
 end if
 %>

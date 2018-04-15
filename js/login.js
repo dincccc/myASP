@@ -1,4 +1,5 @@
 $(document).ready(
+
     $(".login").click(function(){
         var remember;
         if($("#remember").is(":checked"))
@@ -28,7 +29,13 @@ $(document).ready(
         }
     })
        
-)
+)       
+$("#th").click(function(){
+    $("#password").attr("placeholder","默认密码：999999");
+})
+$("#am").click(function(){
+    $("#password").attr("placeholder","默认密码：666666");
+})
 
 function login(url,target_href,remember){
  $.ajax({
