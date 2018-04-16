@@ -3,7 +3,7 @@
 <%
 '教室地址option数据
 labid=request("labtypeid")
-sql="SELECT lab_address,lab_capacity FROM lab_info GROUP BY lab_type_id,lab_address,lab_capacity  HAVING lab_type_id='"&labid&"'"
+sql="SELECT lab_address,lab_capacity FROM lab_info GROUP BY lab_type_id,lab_address,lab_capacity HAVING lab_type_id='"&labid&"'"
 set rs=conn.execute(sql)
 if not(rs.bof and rs.eof) then
 arr=rs.getrows()

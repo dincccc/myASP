@@ -1,0 +1,10 @@
+.add_operate{
+	display: flex;
+	justify-content: center;
+}
+.add{
+	padding: 40px;
+	margin: 0 20px;
+	border: 1px solid #e00;
+
+}

@@ -91,7 +91,7 @@ nav{
 	width: 94px;
 }
 .lab_capacity{
-	width: 80px;
+	width: 70px;
 	color: #fff;
 	padding: 5px 2px;
 	border: 1px solid #fff;
@@ -119,29 +119,6 @@ nav{
 	font-size: 16px;
 }
 
-/* section-mid
- */
-
-/* .week-list{
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-}
-
-.week-list li{
-	border: 1px solid #fff;
-	padding: 2px 4px;
-	margin: 0 4px;
-} */
-/* .week-list li:focus{
-	border-color: #14ead3;
-} */
-/* .week-list li a{
-	padding: 5px;
-	text-align: center;
-} */
  .table{
 	margin: 0 auto;
 	width: 80%;
@@ -153,7 +130,7 @@ nav{
 .table td,
 .table th{
 	width: 100px;
-	height: 40px;
+	height: 50px;
 	border: 1px solid #a7a7a7;
 	text-align: center;
 }
@@ -216,7 +193,7 @@ aside h1{
 	color: #fff;
 	border-radius: 4px;
 	background: rgba(0, 0, 0, 0.6);
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translateX(-50%);

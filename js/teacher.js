@@ -17,13 +17,19 @@ $(".status").each(function(){
 
 $(".keep-pwd").click(function(){
 	$(".pwd-change").toggle();
+	$(".info-change").hide();
+	return false;
 })
-
 $(".change-info").click(function(){
 	$(".info-change").toggle();
+	$(".pwd-change").hide();
+	return false;
 })
 $(".booking-exit").click(function(){
 	window.location.href="../index.asp";
+})
+$("#confirm-ch").click(function(){
+	
 })
 
 /*	$(".phone").attr("contenteditable","true");

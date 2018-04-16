@@ -1,10 +1,8 @@
-﻿window.onload=function(){
-
+﻿$(function(){
 	getAddress();/*获取地址并调用createAddress进行创建*/
 	$(".center_login").click(function(){
 		window.location.href="asp/login.asp";
 	});	
-
 	/*search按钮*/
 	$("#search").click(function(){
 		var lab_type=$("#lab-type option:selected").html();
@@ -13,31 +11,18 @@
 		var se_address_v=se.address_v;
 		var se_week=se.week_v;
 
-		console.table("lab_type:"+lab_type+"lab_address:"+se_address_h+"week_list:"+se_week);
-
-		$(".table td").not(".lesson").html("");
-		$.ajax("search2.asp?address="+se_address_h+"&week="+se_week)
-		.done(function(data){
-			console.table(data);
-/*			var record={record0:{'bk_day' : '2','bk_lesson' : '3','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},record1:{'bk_day' : '2','bk_lesson' : '4','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},record2:{'bk_day' : '2','bk_lesson' : '5','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},};*/
-			var record=eval("("+data+")");
-			$.each(record,function(i,obj){
-				console.table(i+":"+obj.th_id);
-				searchGet(obj.bk_day,obj.bk_lesson,obj.class,obj.bk_reason,obj.th_id);
-			})
-/*			{record0:{'bk_day' : '2','bk_lesson' : '3','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},record1:{'bk_day' : '2','bk_lesson' : '4','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},record2:{'bk_day' : '2','bk_lesson' : '5','class' : '','bk_reason' : 'C语言程序设计','th_id' : '3140705237',},}*/
-
-/*			searchGet(x,y,th_class,bk_reason,bk_by);*/
-
-		})/*获取实验室占用情况数据*/
+		console.table("测试：查询按钮被点击");
 
 		isChoose(se_week,se_address_v
-		,function(){console.log("test");}
+		,function(){searchData(se_address_h,se_week);}
 		,function(){dialog("请选择周次！")}
 		,function(){dialog("请选择实验室！")});
 
-	});
-}
+
+
+
+	})
+});
 
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
@@ -45,27 +30,26 @@
 	/*获取地址并调用createAddress进行创建*/
 	function getAddress(){
 		var labtype=document.getElementById("lab-type");
-		var labtypeops=labtype.getElementsByTagName("option");
-		for(var i=1;i<labtypeops.length;i++){
+		var ops=labtype.getElementsByTagName("option");
+		for(var i=1;i<ops.length;i++){
 			(function(index){
-				labtypeops[index].onclick=function(){
+				ops[index].onclick=function(){
 					$.ajax("search.asp?labtypeid="+index)
 						.done(function(data){
 							var arr=eval("("+data+")");
-							createAddress(arr)
+							createAddress(arr,"lab-address")
 						})
 					}
 			})(i)
 		}
 	}
 	/*创建实验室地址option*/
-	function createAddress(arr){
-		var labad=document.getElementById("lab-address");
-		var labops=labad.getElementsByTagName("option");
+	function createAddress(arr,ID){
+		var SECID=document.getElementById(ID);
 		if(arr==""){
 			console.log("none");
 		}else{
-			labad.options.length=1;		//每次运行之前确保options只有一个。防止累加。
+			SECID.options.length=1;		//每次运行之前确保options只有一个。防止累加。
 			for(var i=0;i<arr.length;i++){
 				var op=document.createElement("option");
 				for(var key in arr[i]){
@@ -77,7 +61,7 @@
 						}	
 					})(i,key)
 				}
-				labad.append(op);	
+				SECID.append(op);	
 			}
 		}
 	}
@@ -126,7 +110,6 @@
 	function dialog(massage){
 		$(".dialog")
 		.html(massage)
-		.stop(true,false)
 		.fadeIn("fast",function(){
 			setTimeout(function(){
 				$(".dialog")
@@ -161,10 +144,28 @@
 		$(".ap_address").html(address);
 		$(".ap_day").html("星期"+x);
 		$(".ap_lesson").html("第"+y+"节课");
+		console.log("测试：aside_data");
 	}
 	/*x=td[value],y=tr[value]*/
 	function searchGet(x,y,th_class,bk_reason,bk_by){
 
 		$("tr[value="+y+"] td[value="+x+"]")
 		.html("班级："+th_class+"</br>"+ "占用原因："+bk_reason+"</br>"+"预约人："+bk_by+"</br>");
+	}
+	/*获取数据并展示在table内*/
+	function searchData(address_h,week){
+		$(".table td").not(".lesson").html("");/*清空上次查询*/
+		$.ajax("search2.asp?address="+address_h+"&week="+week)
+		.done(function(data){
+			console.table("测试：数据已返回");
+			if(data!=""){
+				var record=eval("("+data+")");
+				$.each(record,function(i,obj){
+					console.table("测试：数据已解析");
+					searchGet(obj.bk_day,obj.bk_lesson,obj.class,obj.bk_reason,obj.th_name);
+				})
+			}else{
+				console.log("没有预约信息");
+			}
+		})
 	}

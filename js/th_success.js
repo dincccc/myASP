@@ -21,6 +21,8 @@
 	,function(){dialog("请选择周次！")}
 	,function(){dialog("请选择实验室！")});
 });*/
+
+
 $(".table td").not(".lesson").click(function(){
 	var contant=$(this).html();
 	if(contant!=""){
@@ -54,12 +56,17 @@ $(".table td").not(".lesson").click(function(){
 			var apl_capacity=$("#ap_students").val(); /*申请容量*/
 			var true_capacity=$(".ap_capacity").html(); /*实验室容量*/
 			var apl_reason=$("#ap_reason").val();	/*申请原因*/
+			var apl_class=$("#ap_class option:selected").html();/*申请班级*/
+			var apl_class_v=$("#ap_class option:selected").val();/*申请班级val*/
+
 			if(apl_capacity==""||apl_reason=="")/*判断是否有空*/
 			{
 				dialog("请保证信息填写完整！");
 			}else if(parseInt(apl_capacity)>parseInt(true_capacity))
 			{
 				dialog("容量超出，请选择合适的实验室！");
+			}else if(apl_class_v==0){			/*判断申请班级是否选择*/
+				dialog("请选择班级！");
 			}
 			else{
 				$.ajax({
@@ -71,6 +78,7 @@ $(".table td").not(".lesson").click(function(){
 						"lesson": apl_lesson,
 						"capacity": apl_capacity,
 						"reason": apl_reason,
+						"class": apl_class,
 						"address": apl_address,
 						"th_id": th_id,
 						"now": now,
@@ -80,7 +88,7 @@ $(".table td").not(".lesson").click(function(){
 					dialog(data);
 				})
 				.fail(function() {
-					dialog("申请出错");
+					dialog("申请重复！（或已经有人申请了。");
 				});
 			}
 		})

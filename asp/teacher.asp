@@ -17,7 +17,7 @@ id=session("th_id")
 
 if id<>"" then
 
-sql_info="SELECT th_sex,th_phone,th_mail FROM teacher_info WHERE th_id="&id
+sql_info="SELECT th_sex,th_phone,th_mail,th_class FROM teacher_info WHERE th_id="&id
 set rs=conn.execute(sql_info)
 
 if rs("th_sex")=0 then
@@ -28,6 +28,7 @@ end if
 
 th_phone=rs("th_phone")
 th_mail=rs("th_mail")
+th_class=rs("th_class")
 
 else 
 id=""
@@ -35,6 +36,7 @@ name=""
 sex=""
 th_phone=""
 th_mail=""
+th_class=""
 Response.Write("<script>alert('请登录后使用，谢谢！');window.location.href='login.asp';</script>")
 end if
 %>
@@ -46,6 +48,7 @@ end if
 			<p><span>账号：</span><span><%=id%></span></p>
 			<p><span>姓名：</span><span><%=name%></span></p>
 			<p><span>性别：</span><span><%=sex%></span></p>
+			<p><span>班级：</span><span><%=th_class%></span></p>
 			<p><span>号码：</span><span class="phone"><%=th_phone%></span></p>
 			<p><span>邮箱：</span><span class="mail"><%=th_mail%></span></p>
 		</div>
@@ -69,17 +72,17 @@ end if
 			</div>
 			<a class="confirm-ch" href="javascript:;">确认</a>
 		</div>		
-		
 	</div>
 	<div class="box-booking">
 		<table class="booking-record">
-			<tr><th colspan="10" class="tb_title">预约记录</th></tr>
+			<tr><th colspan="11" class="tb_title">预约记录</th></tr>
 			<tr>
 				<th>序号</th>
 				<th>周次</th>
 				<th>星期</th>
 				<th>课次</th>
 				<th>教室</th>
+				<th>预约班级</th>
 				<th>预约原因</th>
 				<th>预约状态</th>
 				<th>预约时间</th>
@@ -87,14 +90,16 @@ end if
 				<th>删除</th>
 			</tr>
 <%
-sql_record="SELECT bk_re_id,bk_re_status,bk_week,bk_day,bk_lesson,bk_reason,lab_address,bk_date FROM booking_record WHERE th_id="&id
+sql_record="SELECT bk_re_status,bk_week,bk_day,bk_lesson,class,bk_reason,lab_address,bk_date FROM booking_record WHERE th_id="&id&" ORDER by bk_date"
 set re=conn.execute(sql_record)
+num=0
 do until re.eof
-  	num=re.Fields(0).value
-	bk_re_status=re.Fields(1).value
-	week=re.Fields(2).value
-	d_day=re.Fields(3).value
-	lesson=re.Fields(4).value
+  	num=num+1
+	bk_re_status=re.Fields(0).value
+	week=re.Fields(1).value
+	d_day=re.Fields(2).value
+	lesson=re.Fields(3).value
+	th_class=re.Fields(4).value
 	reason=re.Fields(5).value
 	lab_address=re.Fields(6).value
 
@@ -109,14 +114,11 @@ do until re.eof
 
 	b_time=re.Fields(7).value
 
-	'set rl=conn.execute("SELECT lab_address FROM lab_info WHERE lab_id="&lab_id)
-	'lab=rl("lab_address")
-
-  	Response.Write("<tr><td>"&num&"</td><td>"&week&"</td><td>"&d_day&"</td><td>"&lesson&"</td><td>"&lab_address&"</td><td>"&reason&"</td><td class='status'>"&status&"</td><td>"&b_time&"</td><td><i class='fa fa-reply reply'></i></td><td><i class='fa fa-minus-circle delete'></i></td></tr>")
+  	Response.Write("<tr><td>"&num&"</td><td>"&week&"</td><td>"&d_day&"</td><td>"&lesson&"</td><td>"&lab_address&"</td><td>"&th_class&"</td><td>"&reason&"</td><td class='status'>"&status&"</td><td>"&b_time&"</td><td><i class='fa fa-reply reply'></i></td><td><i class='fa fa-minus-circle delete'></i></td></tr>")
   re.MoveNext
 loop
 %>	
-		<tr><td colspan="10"><span>.......</span></td></tr>
+		<tr><td colspan="11"><span>.......</span></td></tr>
 		</table>
 		<div class="booking-exit">返回预约 <i class="fa fa-sign-out"></i></div>
 	</div>
