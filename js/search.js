@@ -4,8 +4,16 @@
 		window.location.href="asp/login.asp";
 	});	
 	/*search按钮*/
+	$("#week-list").change(function(){
+		show_massage();
+		return false;
+	})
 	$("#search").click(function(){
-		var lab_type=$("#lab-type option:selected").html();
+		show_massage();
+		return false;
+	})
+	function show_massage(){
+		
 		var se=getOptionInfo();
 		var se_address_h=se.address_h;
 		var se_address_v=se.address_v;
@@ -17,11 +25,9 @@
 		,function(){searchData(se_address_h,se_week);}
 		,function(){dialog("请选择周次！")}
 		,function(){dialog("请选择实验室！")});
+		
+	}
 
-
-
-
-	})
 });
 
 /*----------------------------------------------------------------------*/

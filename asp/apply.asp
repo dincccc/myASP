@@ -15,10 +15,14 @@ ap_now=request.QueryString("now")
 'sql="SELECT * FROM booking_record WHERE bk_week='"&ap_week&"' and bk_day='"&ap_day&"' and bk_lesson='"&ap_lesson&"'"
 'set rs1=conn.execute(sql)
 'if rs1.eof then
-	sql1="INSERT INTO `booking_record` (`bk_week`,`bk_day`,`bk_lesson`,`bk_reason`,`class`,`lab_address`,`th_id`,`bk_date`) " 
-	sql2="VALUES ('"&ap_week&"','"&ap_day&"','"&ap_lesson&"','"&ap_reason&"','"&ap_class&"','"&ap_address&"','"&th_id&"','"&ap_now&"')"
-	set rs2=conn.execute(sql1&sql2)
-	Response.write("申请发出，请等待审核")
+sql1="INSERT INTO `booking_record` (`bk_week`,`bk_day`,`bk_lesson`,`bk_reason`,`class`,`lab_address`,`th_id`,`bk_date`) " 
+sql2="VALUES ('"&ap_week&"','"&ap_day&"','"&ap_lesson&"','"&ap_reason&"','"&ap_class&"','"&ap_address&"','"&th_id&"','"&ap_now&"')"
+set rs=conn.execute(sql1&sql2)
+Response.write("申请发出，请等待审核")
+rs.close
+conn.close
+set rs=nothing
+set conn=nothing
 'else 
 'Response.write("申请重复！（或已经有人申请了。）")
 'end if

@@ -21,6 +21,7 @@ else
 	if session.contents.count <>0 then
 		session.contents.removeall()
 	end if
+	session("am_id")=userid
 	session("am_name")=rs("admin_name")
 	session("am_pwd")=rs("admin_pwd")
 end if

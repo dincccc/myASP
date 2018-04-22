@@ -1,10 +1,108 @@
-.add_operate{
-	display: flex;
-	justify-content: center;
+input,
+select,
+a:focus, a:active,
+button::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner{
+    outline : 0;
+} 
+a,div,li,ul,table,button{
+	-webkit-user-select: none;
+ 	-moz-user-select: none;
+ 	-ms-user-select: none;
+ 	-o-user-select: none;
+ 	user-select: none; 	
 }
-.add{
-	padding: 40px;
-	margin: 0 20px;
-	border: 1px solid #e00;
+li{
+	list-style: none;
+}
+/* nav */
+.navbar-brand{
+	float: right !important;
+}
+/* end nav */
+.am_container{
+	display: flex;
+	justify-content: space-around;
+}
+.card-header{
+	color: #696767;
+	font-weight: 600;
+	font-size: 20px;
+	cursor: pointer;
+}
+.nav{
+	cursor: pointer;
+}
+a:not([href]):not([tabindex]){
+	color: #666;
+}
 
+
+aside.am_side_left{
+	width: 18%;
+}
+.table{
+	text-align: center;
+}
+
+
+/* 撤销/删除图标 */
+.delete,.reply{
+	width: 18px;
+	font-size: 18px;
+	cursor: pointer;
+	border-radius: 50%;
+}
+.delete:hover,
+.reply:hover{
+	background: #fff;
+}
+.delete{
+	color: red;
+}
+.delete:active,
+.reply:active{
+	font-size: 16px;
+}
+/* end 撤销/删除图标 */
+
+/* side-right */
+aside.am_side_right{
+	width: 82%;
+}
+#add_th_info,
+#add_lab_info{
+	margin: 40px auto;
+	width: 50%;
+	padding: 40px;
+	color: #595959;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: 4px 4px 8px #eee,-4px -4px 8px #eee;
+	box-shadow: 4px 4px 8px #eee,-4px -4px 8px #eee;	
+}
+
+/* side-right sex group */
+#new_th_man,
+#new_th_female,
+.new_th_sex{
+	cursor: pointer;
+}
+.new_th_sex{
+	margin-right: 30px;
+}
+/* end group */
+
+/* end side-right */
+
+
+
+
+
+
+/* dialog */
+.am-dialog{
+	font-size: 14px;
+	color: red;
 }

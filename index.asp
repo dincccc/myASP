@@ -42,19 +42,19 @@
 	</div>
 </nav>
 <section class="section-top">
-	<select name="lab-type" id="lab-type">
-		<option value="0">请选择实验模块</option>
+	<select name="lab-type" id="lab-type" autocomplete="off">
+		<option value="0" selected>请选择实验模块</option>
 		<option value="1">硬件实验室</option>
 		<option value="2">信息安全实验室</option>
 		<option value="3">通信实验室</option>
 		<option value="4">软件实验室</option>
 		<option value="5">物联网实验室</option>
 	</select>
-	<select name="lab-address" id="lab-address">
-		<option value="0">请选择实验室</option>
+	<select name="lab-address" id="lab-address" autocomplete="off">
+		<option value="0" selected>请选择实验室</option>
 	</select>
-		<select name="week-list" id="week-list">
-		<option value="0">请选择周次</option>
+		<select name="week-list" id="week-list" autocomplete="off">
+		<option value="0" selected>请选择周次</option>
 <%
 for i=1 to 20
 response.write("<option value='"&i&"'>第"&i&"周</option>")
@@ -78,7 +78,18 @@ next
 <!-- 课时 -->
 <%
 for i=1 to 13
-response.write("<tr value="&i&"><td class='lesson'>第"&i&"节</td><td value='1'></td><td value='2'></td><td value='3'></td><td value='4'></td><td value='5'></td><td value='6'></td><td value='7'></td></tr>")
+%>
+<tr value=<%=i%>>
+	<td class='lesson'>第<%=i%>节</td>
+	<td value='1'></td>
+	<td value='2'></td>
+	<td value='3'></td>
+	<td value='4'></td>
+	<td value='5'></td>
+	<td value='6'></td>
+	<td value='7'></td>
+</tr>
+<%
 next
 %>
 </table>

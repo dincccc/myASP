@@ -3,11 +3,9 @@ $(".status").each(function(){
 	var status=s.html();
 	if (status=="未通过"){
 		s.css("color","red");
-		s.next().next().children().removeClass().addClass("fa fa-ban").css("color","#ccc");
 	}
 	else if(status=="通过") {
 		s.css("color","green");
-		s.next().next().children().removeClass().addClass("fa fa-ban").css("color","#ccc");
 	}
 	else{
 		console.log("审核中..");

@@ -16,5 +16,9 @@ Response.write("]")
 else
 Response.write("教室查询不存在！")
 end if
+rs.close
+conn.close
+set rs=nothing
+set conn=nothing
 %>
 

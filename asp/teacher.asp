@@ -38,6 +38,10 @@ th_phone=""
 th_mail=""
 th_class=""
 Response.Write("<script>alert('请登录后使用，谢谢！');window.location.href='login.asp';</script>")
+rs.close
+conn.close
+set rs=nothing
+set conn=nothing
 end if
 %>
 <!-- <h1>教师个人中心</h1> -->
@@ -75,7 +79,7 @@ end if
 	</div>
 	<div class="box-booking">
 		<table class="booking-record">
-			<tr><th colspan="11" class="tb_title">预约记录</th></tr>
+			<tr><th colspan="10" class="tb_title">预约记录</th></tr>
 			<tr>
 				<th>序号</th>
 				<th>周次</th>
@@ -86,39 +90,14 @@ end if
 				<th>预约原因</th>
 				<th>预约状态</th>
 				<th>预约时间</th>
-				<th>撤销</th>
-				<th>删除</th>
+				<th>删除记录</th>
 			</tr>
 <%
-sql_record="SELECT bk_re_status,bk_week,bk_day,bk_lesson,class,bk_reason,lab_address,bk_date FROM booking_record WHERE th_id="&id&" ORDER by bk_date"
-set re=conn.execute(sql_record)
-num=0
-do until re.eof
-  	num=num+1
-	bk_re_status=re.Fields(0).value
-	week=re.Fields(1).value
-	d_day=re.Fields(2).value
-	lesson=re.Fields(3).value
-	th_class=re.Fields(4).value
-	reason=re.Fields(5).value
-	lab_address=re.Fields(6).value
-
-	if bk_re_status=0 then
-	status="审核中.."
-	else if bk_re_status=1 then
-	status="通过"
-	else
-	status="未通过"
-	end if
-	end if
-
-	b_time=re.Fields(7).value
-
-  	Response.Write("<tr><td>"&num&"</td><td>"&week&"</td><td>"&d_day&"</td><td>"&lesson&"</td><td>"&lab_address&"</td><td>"&th_class&"</td><td>"&reason&"</td><td class='status'>"&status&"</td><td>"&b_time&"</td><td><i class='fa fa-reply reply'></i></td><td><i class='fa fa-minus-circle delete'></i></td></tr>")
-  re.MoveNext
-loop
-%>	
-		<tr><td colspan="11"><span>.......</span></td></tr>
+sql_record="SELECT bk_re_status,lab_address,bk_week,bK_day,bk_lesson,bk_reason,class,th_id,bk_date FROM booking_record WHERE th_id="&id&" ORDER by bk_date DESC"
+html="<td><i class='fa fa-minus-circle delete'></i></td>"
+%>
+<!-- #include file="record.asp" -->
+		<tr><td colspan="10"><span>.......</span></td></tr>
 		</table>
 		<div class="booking-exit">返回预约 <i class="fa fa-sign-out"></i></div>
 	</div>

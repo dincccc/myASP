@@ -15,7 +15,7 @@ else
 	if remember="1" then
 		response.cookies("th_id")=userid
 		response.cookies("th_id").expires=DateAdd("d",1,now())
-		response.cookies("th_pwd")=password
+		response.cookies("th_pwd")=MD5(password,16)
 		response.cookies("th_pwd").expires=DateAdd("d",1,now())
 	end if
 	if session.contents.count <>0 then
