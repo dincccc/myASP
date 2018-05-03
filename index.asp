@@ -4,7 +4,7 @@
 <html lang="zh-CN">
 <head>
 	<!--[if lt IE 9]>
-        <h1>浏览器版本太低，您不配使用该系统！！</h1>
+        <h1>浏览器版本太低，您使用该系统将获得不好的体验！！</h1>
     <![endif]-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>实验室预约界面</title>
@@ -17,11 +17,12 @@
 	<h2>实验室预约系统</h2>
 	<div class="login-register">	<!-- 登录按钮 -->
 	<% 
+	dim th_name,userid,am_name
 	th_name=session("th_name") 
-	th_id=session("th_id")
-	am_name=session("am_name")
+	userid=session("userid")
+	am_name=session("admin_name")
 	dim status
-
+	response.write("<script>console.log('"&th_name&"H"&userid&"H"&am_name&"');</script>")
 	if am_name="" and th_name<>"" then 
 	response.write("<a class='center_th_name'>"&th_name&"</a>")
 	status="th" 
@@ -64,41 +65,51 @@ next
 	<div class="lab_capacity"><span>容量：</span><span class="ap_capacity"></span></div>
 	<button class="search" id="search"><i class="fa fa-search"></i>&nbsp;查询</button>
 </section>
-<table class="table">
-	<tr><!-- 星期 -->
-		<th></th>
-		<th>星期一</th>
-		<th>星期二</th>
-		<th>星期三</th>
-		<th>星期四</th>
-		<th>星期五</th>
-		<th>星期六</th>
-		<th>星期日</th>
-	</tr>
-<!-- 课时 -->
-<%
-for i=1 to 13
-%>
-<tr value=<%=i%>>
-	<td class='lesson'>第<%=i%>节</td>
-	<td value='1'></td>
-	<td value='2'></td>
-	<td value='3'></td>
-	<td value='4'></td>
-	<td value='5'></td>
-	<td value='6'></td>
-	<td value='7'></td>
-</tr>
-<%
-next
-%>
-</table>
-<footer><!-- 页脚 -->
-	<span>@Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-</footer>
+<div class="msg-select">
+	您当前选择的实验模块是:
+	<span class="msg msg-type"></span>
+	实验室为:
+	<span class="msg msg-addr"></span>
+	实验周次为:
+	<span class="msg msg-week"></span>
+</div>
+<section class="section-mid">
+	<aside class="side-left">
+		<div class="content-shadow"></div>
+		<table class="table">
+			<tr><!-- 星期 -->
+				<th></th>
+				<th>星期一</th>
+				<th>星期二</th>
+				<th>星期三</th>
+				<th>星期四</th>
+				<th>星期五</th>
+				<th>星期六</th>
+				<th>星期日</th>
+			</tr>
+		<!-- 课时 -->
+		<% for i=1 to 13 %>
+		<tr value=<%=i%>>
+			<th class='lesson'>第<%=i%>节</th>
+
+		<% for j=1 to 7 %>
+			<td value=<%=j%>></td>
+		<% next %>
+
+		</tr>
+
+		<% next %>
+
+		</table>
+</aside>
 <!--#include file="asp/aside.asp" -->
+</section>
+<!-- <footer>页脚
+	<span>@Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+</footer> -->
 <div class="dialog"></div>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="js/jquery-3.2.1.js"></script>
 <script src="js/search.js"></script>
 <%
 if status="th" then

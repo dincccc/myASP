@@ -1,4 +1,4 @@
-﻿<%Response.Charset="utf-8"%>
+<%Response.Charset="utf-8"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -12,37 +12,37 @@
 
 <!-- #include file="conn.asp"-->
 <%
-name=session("th_name")
-id=session("th_id")
+	name=session("th_name")
+	id=session("userid")
 
-if id<>"" then
+	if id<>"" then
 
-sql_info="SELECT th_sex,th_phone,th_mail,th_class FROM teacher_info WHERE th_id="&id
-set rs=conn.execute(sql_info)
+	sql_info="SELECT th_sex,th_phone,th_mail,th_class FROM teacher_info WHERE th_id="&id
+	set rs=conn.execute(sql_info)
 
-if rs("th_sex")=0 then
-sex="男"
-else
-sex="女"
-end if
+	if rs("th_sex")=0 then
+	sex="男"
+	else
+	sex="女"
+	end if
 
-th_phone=rs("th_phone")
-th_mail=rs("th_mail")
-th_class=rs("th_class")
+	th_phone=rs("th_phone")
+	th_mail=rs("th_mail")
+	th_class=rs("th_class")
 
-else 
-id=""
-name=""
-sex=""
-th_phone=""
-th_mail=""
-th_class=""
-Response.Write("<script>alert('请登录后使用，谢谢！');window.location.href='login.asp';</script>")
-rs.close
-conn.close
-set rs=nothing
-set conn=nothing
-end if
+	else 
+	id=""
+	name=""
+	sex=""
+	th_phone=""
+	th_mail=""
+	th_class=""
+	Response.Write("<script>alert('请登录后使用，谢谢！');window.location.href='login.asp';</script>")
+	rs.close
+	conn.close
+	set rs=nothing
+	set conn=nothing
+	end if
 %>
 <!-- <h1>教师个人中心</h1> -->
 <div class="container">
@@ -59,7 +59,6 @@ end if
 		<ul class="control-g">
 			<li><a class="keep-pwd" href="javascript:;">修改密码</a></li>
 			<li><a class="change-info" href="javascript:;">修改信息</a></li>
-			<li><a class="save" href="javascript:;">保存</a></li>
 		</ul>
 		<div class="pwd-change clearfix">
 			<div class="pc-box">
@@ -87,13 +86,14 @@ end if
 				<th>课次</th>
 				<th>教室</th>
 				<th>预约班级</th>
-				<th>预约原因</th>
+				<th>实验名称</th>
 				<th>预约状态</th>
 				<th>预约时间</th>
 				<th>删除记录</th>
 			</tr>
 <%
-sql_record="SELECT bk_re_status,lab_address,bk_week,bK_day,bk_lesson,bk_reason,class,th_id,bk_date FROM booking_record WHERE th_id="&id&" ORDER by bk_date DESC"
+sql_record="SELECT bk_re_status,lab_address,bk_week,bk_day,bk_lesson,exp_name,class,th_id,bk_date FROM booking_record WHERE isdel='0' and th_id="&id&" ORDER by bk_date DESC"
+
 html="<td><i class='fa fa-minus-circle delete'></i></td>"
 %>
 <!-- #include file="record.asp" -->
@@ -103,7 +103,7 @@ html="<td><i class='fa fa-minus-circle delete'></i></td>"
 	</div>
 	
 </div>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src='../js/teacher.js' type='text/javascript'></script>
+<script src="../js/jquery-3.2.1.js"></script>
+<script src="../js/teacher.js" type="text/javascript"></script>
 </body>
 </html>

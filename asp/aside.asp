@@ -10,25 +10,29 @@
 		<div><span>申请班级：</span><select name="ap_class" id="ap_class">
 			<option value="0">请选择班级</option>
 		</select></div>
-		<div><span>申请原因：</span><input type="text" id="ap_reason"></div>
+		<div><span>课程名称：</span><input type="text" id="ap_cur_name"></div>
+		<div><span>实验名称：</span><input type="text" id="ap_exp_name"></div>
+		<div><span>申请备注：</span><input type="text" id="ap_reason"></div>
 		<div><span>申请人:</span><span class="ap_name"><%=th_name%></span></div>
-		<div><span>申请人ID:</span><span class="ap_id"><%=th_id%></span></div>
+		<div><span>申请人ID:</span><span class="ap_id"><%=userid%></span></div>
 		<div><span>申请日期：</span><span class="ap_time"><%=date()%></span></div>
-		<button type="button" id="apply">申请</button>
-		<button type="button" id="ap_exit">退出</button>
+		<button type="button" id="apply"><span>申</span><span>请</span></button>
+		<button type="button" id="ap_exit"><span>退</span><span>出</span></button>
 	</div>
 <%
-if th_id<>"" then
-sql="SELECT th_class FROM teacher_info WHERE th_id='"&th_id&"'"
-set rs=conn.execute(sql)
-th_class=rs("th_class")
-response.write("<script>var SECID=document.getElementById('ap_class');var text='"&th_class&"';var arr=text.split(',');if(arr==''){}else{SECID.options.length=1;for(var i=0;i<arr.length;i++){var op=document.createElement('option');op.innerHTML=arr[i];op.value=i+1;SECID.append(op);}}</script>")
-rs.close
-conn.close
-set rs=nothing
-set conn=nothing
+if status="th" then
+	dim sql
+	if userid<>"" then
+	sql="SELECT th_class FROM teacher_info WHERE th_id='"&userid&"'"
+	set rs=conn.execute(sql)
+	th_class=rs("th_class")
+	response.write("<script>var SECID=document.getElementById('ap_class');var text='"&th_class&"';var arr=text.split(',');if(arr==''){}else{SECID.options.length=1;for(var i=0;i<arr.length;i++){var op=document.createElement('option');op.innerHTML=arr[i];op.value=i+1;SECID.append(op);}}</script>")
+	rs.close
+	conn.close
+	set rs=nothing
+	set conn=nothing
+	end if
 end if
-
 %>
 </aside>
 

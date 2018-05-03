@@ -15,8 +15,8 @@
 	<div class="navbar-brand">
 	<%
 	Dim am_id,am_name
-	am_id=session("am_id")
-	am_name=session("am_name")
+	am_id=session("userid")
+	am_name=session("admin_name")
 	if am_id=""then
 	Response.Write("<script>alert('请登录后使用，谢谢！');window.location.href='login.asp';</script>")
 	else
@@ -32,30 +32,48 @@
 	<aside class="am_side_left">
 		<div class="card">
 		    <div class="card-header text-right" data-toggle="collapse" data-parent=".am_side_left" href="#collapseOne">
+		        信息查询
+		    </div>
+		    <div id="collapseOne" class="collapse show">
+				<div class="nav flex-column nav-pills text-right" id="">
+					<a class="nav-link" id="thInfoBtn">教师信息</a>
+					<a class="nav-link" id="labInfoBtn">实验室信息</a>
+				</div>
+		    </div>
+	    </div>
+		<div class="card">
+		    <div class="card-header text-right" data-toggle="collapse" data-parent=".am_side_left" href="#collapseOne">
 		        添加信息
 		    </div>
 		    <div id="collapseOne" class="collapse show">
 				<div class="nav flex-column nav-pills text-right" id="">
-					<a class="nav-link" id="add_th_info_tab">添加教师信息</a>
-					<a class="nav-link" id="add_lab_info_tab">添加实验室信息</a>
+					<a class="nav-link" id="thInfoAddBtn">添加教师信息</a>
+					<a class="nav-link" id="labInfoAddBtn">添加实验室信息</a>
 				</div>
 		    </div>
 	    </div>
 		<div class="card">
 		    <div class="card-header text-right" data-toggle="collapse" data-parent=".am_side_left" href="#collapseSec">
-		        预约审核
+		        预约管理
 		    </div>
 		    <div id="collapseSec" class="collapse show">
 				<div class="nav flex-column nav-pills text-right" id="">
-					<a class="nav-link" id="v_bk_record_tab">预约记录</a>
-					<a class="nav-link" id="v_bk_record_control">预约操作</a>
+					<a class="nav-link" id="bkRecordBtn">预约记录</a>
+					<a class="nav-link" id="checkHistoryBtn">审核历史</a>
+					<a class="nav-link" id="bkRecordControlBtn">预约操作</a>
 				</div>
 		    </div>
 	    </div>
 	</aside>
 	<aside class="am_side_right">
 		<div id="myTabContent" class="tab-content">
-			<div class="tab-pane" id="add_th_info">
+		    <div class="tab-pane" id="thInfoBtn_tab">
+				th_info_tab
+	        </div>
+		    <div class="tab-pane" id="labInfoBtn_tab">
+				lab_info_tab
+	        </div>
+			<div class="tab-pane" id="thInfoAddBtn_tab">
 				<div class="form-group">
 					<label for="new_th_id">ID:</label>
 					<input type="text" class="form-control" id="new_th_id">
@@ -80,7 +98,7 @@
 				</div>
 				<button type="button" class="btn btn-primary btn-block" id="th_submit">提交</button>			
 			</div>
-		    <div class="tab-pane" id="add_lab_info">
+		    <div class="tab-pane" id="labInfoAddBtn_tab">
 				<div class="form-group">
 					<label for="new_lab_adr">地址:</label>
 					<input type="text" class="form-control" id="new_lab_adr">
@@ -95,7 +113,7 @@
 				</div>
 				<button type="button" class="btn btn-primary btn-block" id="lab_submit">提交</button>
 	        </div>
-		    <div class="tab-pane" id="bk_record_tab">
+		    <div class="tab-pane" id="bkRecordBtn_tab">
 				<table class="table table-hover">
 			    <thead class="thead-dark">
 			      <tr>
@@ -113,12 +131,12 @@
 			      </tr>
 			    </thead>
 			    <tbody>
-<%
-sql_record="SELECT bk_re_status,lab_address,bk_week,bk_day,bk_lesson,bk_reason,class,th_id,bk_date,ischeck FROM booking_record WHERE ischeck='0' and bk_re_status='0' ORDER by lab_address"
+				<%
+				sql_record="SELECT bk_re_status,lab_address,bk_week,bk_day,bk_lesson,exp_name,class,th_id,bk_date,ischeck FROM booking_record WHERE ischeck='0' and bk_re_status='0' ORDER by lab_address"
 
-html="<td><i class='fa fa-check reply'></i></td><td><i class='fa fa-times delete'></i></td>"
-%>
-<!-- #include file="record.asp" -->
+				html="<td><i class='fa fa-check reply'></i></td><td><i class='fa fa-times delete'></i></td>"
+				%>
+				<!-- #include file="record.asp" -->
 
 			    </tbody>
 			    <thead class="thead-dark">
@@ -138,8 +156,11 @@ html="<td><i class='fa fa-check reply'></i></td><td><i class='fa fa-times delete
 			    </thead>
 				</table>
 		    </div>
-		    <div class="tab-pane" id="bk_record_control">
-
+		    <div class="tab-pane" id="checkHistoryBtn_tab">
+				check_history
+	        </div>
+		    <div class="tab-pane" id="bkRecordControlBtn_tab">
+				bk_record_control
 	        </div>
 		</div>
 	</aside>
@@ -148,7 +169,7 @@ html="<td><i class='fa fa-check reply'></i></td><td><i class='fa fa-times delete
 
 
 
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../js/jquery-3.2.1.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="../js/admin.js" type="text/javascript"></script>

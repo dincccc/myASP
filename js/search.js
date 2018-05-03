@@ -6,14 +6,13 @@
 	/*search按钮*/
 	$("#week-list").change(function(){
 		show_massage();
-		return false;
 	})
 	$("#search").click(function(){
 		show_massage();
 		return false;
 	})
 	function show_massage(){
-		
+
 		var se=getOptionInfo();
 		var se_address_h=se.address_h;
 		var se_address_v=se.address_v;
@@ -25,8 +24,31 @@
 		,function(){searchData(se_address_h,se_week);}
 		,function(){dialog("请选择周次！")}
 		,function(){dialog("请选择实验室！")});
-		
+
+
+
+		var msg_type_v=$("#lab-type option:selected").val();
+		var msg_type_h=$("#lab-type option:selected").html();
+		msgCheck(".msg-type",msg_type_v,msg_type_h);
+
+		var msg_addr_v=$("#lab-address option:selected").val();
+		var msg_addr_h=$("#lab-address option:selected").html();
+		msgCheck(".msg-addr",msg_addr_v,msg_addr_h);
+
+		var msg_week_v=$("#week-list option:selected").val();
+		var msg_week_h="第"+msg_week_v+"周"
+		msgCheck(".msg-week",msg_week_v,msg_week_h);
 	}
+	$(".table td").hover(function(){
+		var _this=$(this);
+		if(_this.html()==""){
+			_this.html("<span class='bk_active'>点击预约</span>")/*children('.bk_active').css("display","block");*/
+		}else{
+			_this.children('.bk_active').css("display","block");
+		}
+	},function(){
+		$(this).children('.bk_active').css("display","none");
+	})
 
 });
 
@@ -96,6 +118,8 @@
 	}
 	/*aside出现*/
 	function aside_show(){
+		$(".side-left").stop(true,false).animate({"left": "-150px",},600);
+		$(".content-shadow").stop(true,false).show().animate({"opacity": 1,},100);
 		$("aside#applypanel")
 		.stop(true,false)
 		.show()
@@ -106,11 +130,13 @@
 		$("aside#applypanel")
 		.stop(true,false)
 		.animate(
-			{"right": "-320px"},
+			{"right": "-300px"},
 			600,
 			function(){
 				$("aside#applypanel").hide();
-			});	
+			});
+		$(".content-shadow").stop(true,true).animate({"opacity": 0,},100).hide();
+		$(".side-left").stop(true,false).animate({"left": 0,},600);
 	}
 	/*提示框*/
 	function dialog(massage){
@@ -149,18 +175,19 @@
 		$(".ap_week").html("第"+week+"周");
 		$(".ap_address").html(address);
 		$(".ap_day").html("星期"+x);
+		$(".ap_day").attr("value",x);
 		$(".ap_lesson").html("第"+y+"节课");
+		$(".ap_lesson").attr("value",y);
 		console.log("测试：aside_data");
 	}
 	/*x=td[value],y=tr[value]*/
-	function searchGet(x,y,th_class,bk_reason,bk_by){
-
+	function searchGet(x,y,th_class,exp_name,bk_by){
 		$("tr[value="+y+"] td[value="+x+"]")
-		.html("班级："+th_class+"</br>"+ "占用原因："+bk_reason+"</br>"+"预约人："+bk_by+"</br>");
+		.html("班级："+th_class+"</br>"+ "占用原因："+exp_name+"</br>"+"预约人："+bk_by+"</br>");
 	}
 	/*获取数据并展示在table内*/
 	function searchData(address_h,week){
-		$(".table td").not(".lesson").html("");/*清空上次查询*/
+		$(".table td").html("");/*清空上次查询*/
 		$.ajax("search2.asp?address="+address_h+"&week="+week)
 		.done(function(data){
 			console.table("测试：数据已返回");
@@ -168,10 +195,18 @@
 				var record=eval("("+data+")");
 				$.each(record,function(i,obj){
 					console.table("测试：数据已解析");
-					searchGet(obj.bk_day,obj.bk_lesson,obj.class,obj.bk_reason,obj.th_name);
+					searchGet(obj.bk_day,obj.bk_lesson,obj.class,obj.exp_name,obj.th_name);
 				})
 			}else{
 				console.log("没有预约信息");
 			}
 		})
+	}
+	/*msg-select判断方法*/
+	function msgCheck(msg_class,msg_v,msg_h){
+		if(msg_v==0){
+			$(msg_class).html("-----");
+		}else{	
+			$(msg_class).html(msg_h);
+		}
 	}

@@ -1,6 +1,6 @@
 $(function(){
 
-	/*side-left btn*/
+/*side-left btn*/
 	$(".card-header").click(function(){
 		$("a.nav-link").removeClass("active");
 	})
@@ -8,23 +8,24 @@ $(function(){
 		$("a.nav-link").removeClass("active");
 		$(this).addClass("active");
 	})
-	$("#add_th_info_tab").click(function(){
-		$("#add_th_info").toggle();
-		$(".tab-pane").not("#add_th_info").hide();
-	})
-	$("#add_lab_info_tab").click(function(){
-		$("#add_lab_info").toggle();
-		$(".tab-pane").not("#add_lab_info").hide();
-	})
-	$("#v_bk_record_tab").click(function(){
-		$("#bk_record_tab").toggle();
-		$(".tab-pane").not("#bk_record_tab").hide();
-	})
-	$("#v_bk_record_control").click(function(){
-		$("#bk_record_control").toggle();
-		$(".tab-pane").not("#bk_record_control").hide();
-	})
-	/*状态颜色*/
+	clickCommon("#thInfoBtn");
+	clickCommon("#labInfoBtn");
+	clickCommon("#thInfoAddBtn");
+	clickCommon("#labInfoAddBtn");
+	clickCommon("#bkRecordBtn");
+	clickCommon("#checkHistoryBtn");
+	clickCommon("#bkRecordControlBtn");
+
+	function clickCommon(leftID){
+		$(leftID).click(function(){
+			var rightID=leftID+"_tab";
+			$(rightID).toggle();
+			$(".tab-pane").not(rightID).hide();
+		})
+	}
+/*end side-left btn*/
+
+/*状态颜色*/
 	$(".status").each(function(){
 		s=$(this);
 		var status=s.html();
@@ -35,34 +36,41 @@ $(function(){
 			s.css("color","green");
 		}
 		else{
-			console.log("审核中..");
+			/*console.log("审核中..");*/
 		}
 	})
-	/*表单验证*/
+/*end 状态颜色*/
+
+/*表单验证*/
 	$("#th_submit").click(function(){
-
-
 		$("input").not("[type='radio']").each(function(){
-		
 			_this=$(this);
 			var id=_this.attr("id");
-			console.log(id);
 			if(_this.val()==""){
 				amDialog("#"+id,"不能为空","red");
 			}
 			else{
 				amDialog("#"+id,"","green");
-
 			}
-		
 		})
+	})
+	$("input").not("[type='radio']").blur(function(){
+		_this=$(this);
+		var id=_this.attr("id");
+		if(_this.val()!=""){
+			amDialog("#"+id,"","green");
+		}
+		else{
+		}
 	})
 	function amDialog(ID,text,color){
 		$(ID).css("border-color",color);
 		$(ID).next().remove();
 		$(ID).after("<div class='am-dialog'>"+text+"</div>");
 	}
-	/*获取时间*/
+/*end 表单验证*/
+
+/*获取时间*/
 	function getDate(){
 		var date=new Date();
 		var year=date.getFullYear();
@@ -77,48 +85,60 @@ $(function(){
 		/*var day=date.getDay();*/
 		return now=year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
 	}
-	/*审核按钮*/
+/*end 获取时间*/
+
+/*审核按钮*/
+	/*批准*/
 	$(".reply").click(function(){
 		getDate();
 		var msgP=confirm("确定批准吗？");
 		if(msgP==true){
 			var theNode=$(this).parent().parent();
-
-			var c_week=theNode.children().eq(1).text();
-			var c_day=theNode.children().eq(2).text();
-			var c_lesson=theNode.children().eq(3).text();
-			var c_lab_address=theNode.children().eq(4).text();
 			var check_by=$(".get_am_id").attr("value");
-			theNode.hide("fast",function(){
-				theNode.remove();	
-				$.ajax({
-					url: "ischeck-del.asp",
-					data: {
-						"week": c_week,
-						"day": c_day,
-						"lesson": c_lesson,
-						"lab-address": c_lab_address,
-						"check-by": check_by,
-						"now": now,
-						"isfrom": 1,
-					}
-				}).done(function(){
-					console.log("success");
-				}).fail(function(){
-					console.log("filed");
-				})		
-			});
+			checkBtn(theNode,"amp",check_by);
 		}else{
-			console.log("nothing");
+			console.log("Pnothing");
 		}
 	})
+	/*拒绝*/
 	$(".delete").click(function(){
+		getDate();
 		var msgJ=confirm("确定拒绝吗？");
 		if(msgJ==true){
-			console.log("jus");
+			var theNode=$(this).parent().parent();
+			var check_by=$(".get_am_id").attr("value");
+			checkBtn(theNode,"amj",check_by)
 		}else{
-			console.log("nothing");
+			console.log("Jnothing");
 		}
 	})
+/*end 审核按钮*/
 
 })
+/*审核按钮事件*/
+	function checkBtn(theNode,isfrom,check_by){
+		var c_week=theNode.children().eq(1).text();
+		var c_day=theNode.children().eq(2).text();
+		var c_lesson=theNode.children().eq(3).text();
+		var c_lab_address=theNode.children().eq(4).text();
+		theNode.hide("fast",function(){
+			theNode.remove();	
+			$.ajax({
+				url: "ischeck-del.asp",
+				data: {
+					"week": c_week,
+					"day": c_day,
+					"lesson": c_lesson,
+					"lab-address": c_lab_address,
+					"check-by": check_by,
+					"now": now,
+					"isfrom": isfrom,
+				}
+			}).done(function(){
+				console.log("success");
+			}).fail(function(){
+				console.log("filed");
+			})		
+		})
+	}
+/*end 审核按钮事件*/

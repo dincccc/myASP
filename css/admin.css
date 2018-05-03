@@ -71,8 +71,8 @@ aside.am_side_left{
 aside.am_side_right{
 	width: 82%;
 }
-#add_th_info,
-#add_lab_info{
+#thInfoAddBtn_tab,
+#labInfoAddBtn_tab{
 	margin: 40px auto;
 	width: 50%;
 	padding: 40px;

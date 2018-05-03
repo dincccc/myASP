@@ -71,9 +71,7 @@ body{
 	background: #666;
 	transition: 200ms all linear;
 }
-.control-g li:nth-child(3){
-	display: none;
-}
+
 
 /*修改密码*/
 .pwd-change,.info-change{
