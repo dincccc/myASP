@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-  <div class="title"><span>登</span><span>录</span><span>界</span><span>面</span></div>
+  <div class="title"><span>实验室预约系统</span></div>
   <div class="box"> 
     <%
       userid=request.cookies("userid")

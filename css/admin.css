@@ -13,12 +13,21 @@ a,div,li,ul,table,button{
  	-o-user-select: none;
  	user-select: none; 	
 }
+a:hover{
+	text-decoration: none;
+}
 li{
 	list-style: none;
 }
 /* nav */
 .navbar-brand{
 	float: right !important;
+}
+.msg-time{
+	padding: 4px;
+	border-radius: 4px;
+	border: 1px solid #fff;
+	color: #fff;
 }
 /* end nav */
 .am_container{
@@ -38,38 +47,23 @@ a:not([href]):not([tabindex]){
 	color: #666;
 }
 
-
 aside.am_side_left{
 	width: 18%;
 }
-.table{
-	text-align: center;
-}
 
-
-/* 撤销/删除图标 */
-.delete,.reply{
-	width: 18px;
-	font-size: 18px;
-	cursor: pointer;
-	border-radius: 50%;
-}
-.delete:hover,
-.reply:hover{
-	background: #fff;
-}
-.delete{
-	color: red;
-}
-.delete:active,
-.reply:active{
-	font-size: 16px;
-}
-/* end 撤销/删除图标 */
 
 /* side-right */
 aside.am_side_right{
 	width: 82%;
+}
+#labInfoBtn_tab{
+	margin: 0 auto;
+	width: 80%;
+	-webkit-box-shadow: 4px 4px 8px #eee,-4px -4px 8px #eee;
+	box-shadow: 4px 4px 8px #eee,-4px -4px 8px #eee;
+}
+.lab-info-tab .table{
+	width: 100%;
 }
 #thInfoAddBtn_tab,
 #labInfoAddBtn_tab{
@@ -89,20 +83,90 @@ aside.am_side_right{
 .new_th_sex{
 	cursor: pointer;
 }
-.new_th_sex{
+.new_th_sex,.new_lab_type{
 	margin-right: 30px;
 }
 /* end group */
 
+.table{
+	text-align: center;
+}
+
+/* pageControl */
+.pageRecord td{ border: 0 !important; border-right: 1px solid #10364c !important; padding: 0 !important;}
+.pageRecord input[name="page"],.pageRecord input[name="pageH"]{
+	background: #602e36; 
+	color:#fff;
+	font-weight: 600;
+	height: 24px;
+	width: 56px;
+	font-size: 16px;
+}
+.pageRecordTab{
+	float: right;
+	padding: 10px 4px 10px 50px;
+	color: #fff;
+	background: -webkit-linear-gradient(right, #10364c, #ea1f10);
+	background: -o-linear-gradient(right, #10364c, #ea1f10);
+	background: linear-gradient(to left, #10364c, #ea1f10);
+
+	clip-path: polygon(0 50%,4% 0,100% 0,100% 100%,4% 100%);
+}
+.pageRecordTab a[onclick]{
+	color: #fff;
+	font-weight: 600;
+}
+.pageRecordTab a[onclick]:hover{
+	color: #10a1ea;
+	cursor: pointer;
+}
+#submitPage,#submitPageH{
+	cursor: pointer;
+	font-weight: 600;
+	background: #602e36;
+	color: #fff;
+}
+#submitPage:hover,#submitPageH:hover{color: #ddd;}
+#submitPage:active,#submitPageH:active{
+	background: #3e313f;
+}
+/* 撤销/删除图标 */
+.delete,.reply{
+	width: 18px;
+	font-size: 18px;
+	cursor: pointer;
+	border-radius: 50%;
+}
+.delete:hover,
+.reply:hover{
+	background: #fff;
+}
+.delete{
+	color: red;
+}
+.delete:active,
+.reply:active{
+	font-size: 16px;
+}
+/* end 撤销/删除图标 */
 /* end side-right */
-
-
-
-
 
 
 /* dialog */
 .am-dialog{
 	font-size: 14px;
 	color: red;
+}
+/* 提示框 */
+.dialog{
+	z-index: 1003;
+	padding: 8px;
+	color: #fff;
+	border-radius: 4px;
+	background: rgba(0, 0, 0, 0.6);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%);
+	display: none;
 }

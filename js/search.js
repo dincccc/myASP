@@ -57,19 +57,21 @@
 
 	/*获取地址并调用createAddress进行创建*/
 	function getAddress(){
-		var labtype=document.getElementById("lab-type");
-		var ops=labtype.getElementsByTagName("option");
-		for(var i=1;i<ops.length;i++){
-			(function(index){
-				ops[index].onclick=function(){
+		$("#lab-type option").each(function(index){
+			var _this=$(this);
+			_this.click(function(){
+				if(index==0){
+					$("#lab-address option").not("[value=0]").remove();	
+				}else
+				{
 					$.ajax("search.asp?labtypeid="+index)
-						.done(function(data){
-							var arr=eval("("+data+")");
-							createAddress(arr,"lab-address")
-						})
-					}
-			})(i)
-		}
+					.done(function(data){
+						var arr=eval("("+data+")");
+						createAddress(arr,"lab-address")
+					})
+				}	
+			})
+		})	
 	}
 	/*创建实验室地址option*/
 	function createAddress(arr,ID){

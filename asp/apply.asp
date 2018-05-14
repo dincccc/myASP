@@ -2,17 +2,17 @@
 <!-- #include file="conn.asp"-->
 <%
 '插入booking_record数据
-ap_week=request.QueryString("week")
-ap_day=request.QueryString("day")
-ap_lesson=request.QueryString("lesson")
-ap_capacity=request.QueryString("capacity")
-ap_address=request.QueryString("address")
-ap_cur_name=request.QueryString("cur_name")
-ap_exp_name=request.QueryString("exp_name")
-ap_reason=request.QueryString("reason")
-ap_class=request.QueryString("class")
-th_id=request.QueryString("th_id")
-ap_now=request.QueryString("now")
+ap_week=request.Form("week")
+ap_day=request.Form("day")
+ap_lesson=request.Form("lesson")
+ap_capacity=request.Form("capacity")
+ap_address=request.Form("address")
+ap_cur_name=request.Form("cur_name")
+ap_exp_name=request.Form("exp_name")
+ap_reason=request.Form("reason")
+ap_class=request.Form("class")
+th_id=request.Form("th_id")
+ap_now=request.Form("now")
 ' 查重ap_week ap_day ap_lesson
 'sql="SELECT * FROM booking_record WHERE bk_week='"&ap_week&"' and bk_day='"&ap_day&"' and bk_lesson='"&ap_lesson&"'"
 'set rs1=conn.execute(sql)

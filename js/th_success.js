@@ -5,10 +5,15 @@ $(".content-shadow").click(function(){
 	aside_hide();
 	return false;
 })
+
 $(".table td").click(function(){
+	var chooseWeeks=$("#week-list option:selected").val();
+	var nowWeeks=parseInt($(".msg-time-weeks").html());
 	var contant=$(this).children().prop("class");
 	if(contant!="bk_active"){
-		dialog("不能预约")
+		dialog("本时间段不能预约!")
+	}else if(chooseWeeks<nowWeeks){
+		dialog("当前周次不能预约！");
 	}
 	else{
 		var x=$(this).attr("value");			/*td的value值*/
@@ -20,9 +25,13 @@ $(".table td").click(function(){
 		var ap_week_v=ap.week_v;			/*周次value值*/
 
 		isChoose(ap_week_v,ap_address_v
-			,function(){aside_data(ap_week_v,ap_address_h,x,y);}
+			,function(){
+				aside_data(ap_week_v,ap_address_h,x,y);
+			}
 			,function(){dialog("请选择周次！")}
 			,function(){dialog("请选择实验室！")});
+
+
 	}
 	return false;
 })
@@ -37,7 +46,7 @@ $(".table td").click(function(){
 		var apl_lesson=$(".ap_lesson").attr("value");;							/*lesson value值*/
 		var apl_capacity=$("#ap_students").val(); 	/*申请容量*/
 		var true_capacity=$(".ap_capacity").html(); /*实验室容量*/
-		var apl_cur_name=$("#ap_cur_name").val();		/*课程名称*/
+		var apl_cur_name=$("#ap_cur_name option:selected").html();		/*课程名称*/
 		var apl_exp_name=$("#ap_exp_name").val();		/*实验名称*/
 		var apl_reason=$("#ap_reason").val();		/*申请原因*/
 		var apl_class=$("#ap_class option:selected").html();/*申请班级*/
@@ -57,7 +66,7 @@ $(".table td").click(function(){
 			console.log("error");
 			$.ajax({
 				url:  'asp/apply.asp',
-				type: 'GET',
+				type: 'POST',
 				data: {
 					"week": apl_week,
 					"day": apl_day,
@@ -83,4 +92,3 @@ $(".table td").click(function(){
 	})
 
 /*end 申请按钮绑定*/	
-

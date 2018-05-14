@@ -2,11 +2,11 @@
 <!-- #include file="conn.asp"-->
 <!-- #include file="QL.Des.asp"-->
 <%
-userid=request.QueryString("id")
-password=request.QueryString("pass")
-remember=request.QueryString("remember")
-identity=request.QueryString("identity")
-code=request.QueryString("code")
+userid=request.Form("id")
+password=request.Form("pass")
+remember=request.Form("remember")
+identity=request.Form("identity")
+code=request.Form("code")
 
 if identity="th" then
 	dim sql1

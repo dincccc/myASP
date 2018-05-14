@@ -17,22 +17,32 @@ li{
 body{
 	background: #fff;
 }
+header{
+	padding: 15px 40px;
+	background: -webkit-linear-gradient(bottom, #091d28, #10374d);
+	background: -o-linear-gradient(bottom, #091d28, #10374d);
+	background: linear-gradient(to top, #091d28, #10374d);
+}
+header h2{
+	color: #fff;
+	font-size: 20px;
+}
 .container{
-	width: 86%;
-/* 	border: 1px solid #00b6dd; */
-	margin: 100px auto;
+	margin: 20px auto;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	width: 86%;
+/* 	border: 1px solid #00b6dd; */
 }
 .box-info{
-	color: #696969;
-	width: 22%;
-	height: 580px;
-	padding: 10px;
-	border: 1px solid #ccc;
 	display: flex;
 	flex-direction: column;
+	align-self: flex-start;
+	color: #696969;
+	width: 22%;
+	padding: 10px;
+	border: 1px solid #ccc;
 }
 .info-title{
 	font-size: 18px;
@@ -60,14 +70,14 @@ body{
 	display: flex;
 	justify-content: space-between;
 }
-.control-g li,.confirm-ch,.booking-exit{
+.control-g li,.confirm,.booking-exit,#submitPage{
 	border: 1px solid #fff;
 	border-radius: 4px;	
 	padding: 6px;
 	background: #868889;
 	cursor: pointer;
 }
-.control-g li:active,.confirm-ch:active{
+.control-g li:active,.confirm:active{
 	background: #666;
 	transition: 200ms all linear;
 }
@@ -99,7 +109,7 @@ body{
     cursor: pointer;
 }
 
-.confirm-ch{
+.confirm{
 	text-align: center;
 	display: block;
 	margin-top: 16px;
@@ -108,7 +118,7 @@ body{
 
 /* 预约记录 */
 .box-booking{
-	width: 78%;
+	width: 79%;
 	height: 580px;
 	padding: 0 10px;
 /* 	border: 1px solid #11b3ff; */
@@ -128,27 +138,66 @@ body{
 	color: #717171;
 	font-size: 1.5em;
 	font-weight: 600;
+	letter-spacing: 14px;
 }
 .booking-record tr th,
 .booking-record tr td,
 .title{
-
+	padding: 0 4px;
 	border: 1px solid #b5b5b5;
+	width: 70px;
 }
-.booking-record tr th,.booking-record tr td{
-/* 	text-align: center; */
-}
+
 
 /* 撤销/删除图标 */
 .delete,.reply{
 	font-size: 18px;
 	cursor: pointer;
 }
+.ban{font-size: 16px;}
 .delete{
 	color: red;
 }
 .delete:active,.reply:active{
 	font-size: 16px;
+}
+
+/* pageControl */
+.pageRecord td{ border: 0 !important; border-right: 1px solid #10364c !important; padding: 0 !important;}
+.pageRecord input[name="page"]{
+	background: #602e36; 
+	color:#fff;
+	font-weight: 600;
+	height: 24px;
+	width: 56px;
+	font-size: 16px;
+}
+.pageRecordTab{
+	float: right;
+	padding: 10px 4px 10px 50px;
+	color: #fff;
+	background: -webkit-linear-gradient(right, #10364c, #ea1f10);
+	background: -o-linear-gradient(right, #10364c, #ea1f10);
+	background: linear-gradient(to left, #10364c, #ea1f10);
+
+	clip-path: polygon(0 50%,4% 0,100% 0,100% 100%,4% 100%);
+}
+.pageRecordTab a{
+	cursor: pointer;
+	font-weight: 600;
+	color: #fff;
+}
+.pageRecordTab a:hover{
+	color: #10a1ea;
+}
+#submitPage{
+	font-weight: 600;
+	background: #602e36;
+	color: #fff;
+}
+#submitPage:hover{color: #ddd;}
+#submitPage:active{
+	background: #3e313f;
 }
 
 
@@ -176,4 +225,30 @@ body{
 .booking-exit:active{
 	background: #1287c2;
 	transition: 200ms all linear;
+}
+
+
+
+
+
+
+
+
+/* dialog */
+.am-dialog{
+	font-size: 14px;
+	color: red;
+}
+/* 弹出式提示框 */
+.dialog{
+	z-index: 1003;
+	padding: 8px;
+	color: #fff;
+	border-radius: 4px;
+	background: rgba(0, 0, 0, 0.6);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%);
+	display: none;
 }

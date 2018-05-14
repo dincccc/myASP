@@ -49,7 +49,7 @@ function changeCode(){
 function login(target_href,remember,checkcode,identity){
  $.ajax({
         url: "check.asp",
-        type: 'GET',
+        type: 'POST',
         data: {
             "id": $("#userid").val(),
             "pass": $("#password").val(),

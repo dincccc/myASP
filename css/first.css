@@ -20,18 +20,29 @@ a{
  	-o-user-select: none;
  	user-select: none; 	
 }
+.clearfix:after{
+	content: '';
+	clear: both;
+	display: block;
+}
 body{
 	background: #FFF;
 }
+nav,
+.section-top,
+.msg-select{
+	background: -webkit-linear-gradient(left, #091d28, #10374d, #091d28);
+	background: -o-linear-gradient(left, #091d28, #10374d, #091d28);
+	background: linear-gradient(to right, #091d28, #10374d, #091d28);
+}
 nav{
-	height: 54px;
-	padding-top: 10px;
-	background: #091d28;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	height: 54px;
+	padding-top: 10px;
 }
-.navigation h2,
+.logo-title,
 .login-register{
 	display: inline-block;
 	justify-self: flex-start;
@@ -40,9 +51,12 @@ nav{
 	border: 2px solid #1fbaed;
 	border-radius: 4px;	
 }
-.navigation h2{
+.logo-title{
 	margin-left: 30px;
 	color: #1fbaed;
+}
+.logo-title small{
+	letter-spacing: 3px;
 }
 
 .login-register{
@@ -67,8 +81,7 @@ nav{
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
-	height: 60px;
-	background: #091d28;
+	padding-bottom: 20px;
 }
 
 /* section-top
@@ -76,9 +89,9 @@ nav{
 #lab-type,
 #lab-address,
 #week-list{
+	margin-right: 40px;
 	width: 150px;
 	height: 34px;
-	margin-right: 40px;
 	text-align: center;
 	color: #1fbaed;
 	border: 1px solid #1fbaed;
@@ -125,12 +138,11 @@ nav{
 
 /* msg-select */
 .msg-select{
-	padding: 8px;
 	display: flex;
 	justify-content: center;
+	padding: 8px;
 	color: #fff;
 	border-top: 1px solid #1fbaed;
-	background: #091d28;
 }
 .msg{
 	margin-left: 10px;
@@ -141,6 +153,7 @@ nav{
 /* section-mid */
 .section-mid{
 	position: relative;
+	height: 791px;
 }
 .side-left{
 	position: absolute;
@@ -150,13 +163,14 @@ nav{
 }
 
  .table{
+ 	table-layout:fixed;
 	margin: 10px auto;
 	border-collapse: collapse;
 	border-spacing: 0;
 }
 .table td,
 .table th{
-	width: 124px;
+	width: 120px;
 	height: 55px;
 	border: 1px solid #a7a7a7;
 	text-align: center;
@@ -226,7 +240,7 @@ nav{
 		flex-direction: column;
 	}
 	.apply-box div{
-		padding: 10px 20px;
+		padding: 5px 20px;
 		display: flex;
 		justify-content: space-between;
 		border-top: 1px solid #1fbaed;
@@ -256,17 +270,7 @@ nav{
 	}
 /* end aside */
 
-/* footer */
-footer{
-	position: absolute;
-	bottom: 0;
-	padding: 30px 0;
-	background: #92a791;
-	text-align: center;
-}
-footer span{
-	color: #006f5b;
-}
+
 
 
 
