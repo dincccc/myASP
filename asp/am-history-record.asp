@@ -61,12 +61,13 @@ do while not rsH.eof and iH<maxperpageH
 	lab_addressH=rsH("lab_address")
 	p_classH=rsH("class")
 	exp_nameH=rsH("exp_name")
+	cur_nameH=rsH("cur_name")
 	check_dateH=rsH("check_date")
-	response.write "<tr><td>"&iH&"</td><td>"&bk_weekH&"</td><td>"&bk_dayH&"</td><td>"&bk_lessonH&"</td><td>"&lab_addressH&"</td><td>"&p_classH&"</td><td>"&exp_nameH&"</td><td class='status'>"&bk_re_statusH&"</td><td>"&check_dateH&"</td></tr>"
+	response.write "<tr><td>"&iH&"</td><td>"&bk_weekH&"</td><td>"&bk_dayH&"</td><td>"&bk_lessonH&"</td><td>"&lab_addressH&"</td><td>"&p_classH&"</td><td>"&cur_nameH&"--"&exp_nameH&"</td><td class='status'>"&bk_re_statusH&"</td><td>"&check_dateH&"</td></tr>"
 	rsH.movenext
 	loop
 	rsH.close
-	set rs=nothing
+	set rsH=nothing
 	conn.close
 	set conn=nothing
 %>

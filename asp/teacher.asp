@@ -10,7 +10,10 @@
 <script src="../js/validate.js" type="text/javascript"></script>
 </head>
 <body>
-<header><h2>教师个人中心</h2></header>
+<header>
+	<h2>教师个人中心</h2>
+	<div class="booking-exit">返回预约 <i class="fa fa-sign-out"></i></div>
+</header>
 <!-- #include file="conn.asp"-->
 <%
 	name=session("th_name")
@@ -46,7 +49,7 @@
 	end if
 %>
 <!-- <h1>教师个人中心</h1> -->
-<div class="container">
+<div class="container clearfix">
 	<div class="box-info">
 		<span class="info-title">个人信息:</span>
 		<div class="info-table">
@@ -74,7 +77,7 @@
 				<div class="phone-new"><label for="phone-new">新号码:</label><input id="phone-new" type="text"></div>
 				<div class="mail-new"><label for="mail-new">新邮箱:</label><input id="mail-new" type="text"></div>
 			</div>
-			<a class="confirm confirmChInfo" href="javascript:;">确认</a>
+			<a class="confirm confirmChInfo" href="javascript:;">提交</a>
 		</div>		
 	</div>
 	<div class="box-booking">
@@ -99,7 +102,6 @@
 			<!-- #include file="pageRecord.asp" -->
 		</tbody>
 		</table>
-		<div class="booking-exit">返回预约 <i class="fa fa-sign-out"></i></div>
 	</div>	
 </div>
 <!-- #include file="footer.asp" -->		<!-- 页脚 -->

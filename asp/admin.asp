@@ -11,7 +11,8 @@
 <script src="../js/getWeeks.js"></script>
 </head>
 <body>
-<!-- #include file="conn.asp"-->
+
+
 <nav class="navbar  bg-dark navbar-dark ">
 	<div class="navbar-brand">
 		<%
@@ -28,7 +29,14 @@
 		end if
 		%>
 	</div>
-	<div class="msg-time">当前周次：<sapn class="msg-time-weeks"></sapn></div>
+	<div class="am-nav-right">
+		<div class="msg-time ">当前周次：<sapn class="msg-time-weeks"></sapn></div>
+		<div class="am-return ">返回首页</div>	
+		<div class="loginOutSide">
+			<a href="loginOut.asp">退出登录<i class="fa fa-sign-out"></i></a>
+		</div><!-- 退出按钮 -->	
+	</div>
+
 </nav>
 <div class="am_container">
 	<aside class="am_side_left">
@@ -45,12 +53,13 @@
 	    </div>
 		<div class="card">
 		    <div class="card-header text-right" data-toggle="collapse" data-parent=".am_side_left" href="#collapseSec">
-		        添加信息
+		        添加/修改信息
 		    </div>
 		    <div id="collapseSec" class="collapse show">
 				<div class="nav flex-column nav-pills text-right" id="">
 					<a class="nav-link" id="thInfoAddBtn">添加教师信息</a>
 					<a class="nav-link" id="labInfoAddBtn">添加实验室信息</a>
+					<a class="nav-link" id="labInfoChangeBtn">修改实验室信息</a>
 				</div>
 		    </div>
 	    </div>
@@ -60,13 +69,14 @@
 		    </div>
 		    <div id="collapseTir" class="collapse show">
 				<div class="nav flex-column nav-pills text-right" id="">
-					<a class="nav-link" id="bkRecordBtn">预约记录</a>
+					<a class="nav-link active" id="bkRecordBtn">预约记录</a>
 					<a class="nav-link" id="checkHistoryBtn">审核历史</a>
 				</div>
 		    </div>
 	    </div>
 	</aside>
 	<aside class="am_side_right">
+
 		<div id="myTabContent" class="tab-content">
 		    <div class="tab-pane" id="thInfoBtn_tab">
 			<!-- #include file="am-thInfo-search.asp"-->
@@ -108,28 +118,36 @@
 				</div>
 				<button type="button" class="btn btn-primary btn-block" id="th_submit">提交</button>			
 			</div>
+		<!-- ------------------------------ -->
+			<div class="tab-pane" id="labInfoChangeBtn_tab">
+				<!-- #include file="am-change-lab-info.asp" -->
+			</div>
 		    <div class="tab-pane" id="labInfoAddBtn_tab">
+				<!-- 实验室id -->
+				<!-- 
 				<div class="form-group">
 					<label for="new_lab_id">实验室ID:</label>
 					<input type="number" class="form-control" id="new_lab_id" min="1" >
 				</div>
+				 -->
 				<div class="form-group">
 					<label for="new_lab_adr">实验室地址:</label>
-					<input type="text" class="form-control" id="new_lab_adr">
+					<input type="text" class="form-control" id="new_lab_adr" placeholder="输入实验室地址，如：5教213">
 				</div>
 				<div class="form-group">
 				    <label for="new_lab_type">实验模块:</label>
 				    <select class="form-control" id="new_lab_type">
+				    	<!-- #include file="conn.asp"-->
 						<%
-						dim sqlLabtype
-						sqlLabtype="SELECT lab_type_id,lab_type_name FROM lab_type"
-						set rsLabT=conn.execute(sqlLabtype)
-						if not(rsLabT.bof and rsLabT.eof) then
-						arr=rsLabT.getrows
-						recN=UBound(arr,2)
+						dim sqlLabtypeC
+						sqlLabtypeC="SELECT lab_type_id,lab_type_name FROM lab_type"
+						set rsLabTC=conn.execute(sqlLabtypeC)
+						if not(rsLabTC.bof and rsLabTC.eof) then
+						arrC=rsLabTC.getrows
+						recN=UBound(arrC,2)
 							for i=0 to recN
 						%>
-							<option value=<%=arr(0,i)%>><%=arr(1,i)%></option>
+							<option value=<%=arrC(0,i)%>><%=arrC(1,i)%></option>
 						<%
 							next
 						else
@@ -146,7 +164,7 @@
 				</div>
 				<button type="button" class="btn btn-primary btn-block" id="lab_submit">提交</button>
 	        </div>
-		    <div class="tab-pane" id="bkRecordBtn_tab">
+		    <div class="tab-pane active" id="bkRecordBtn_tab">
 				<table class="table table-hover">
 			    <thead class="thead-dark">
 			      <tr>
@@ -191,8 +209,8 @@
 		</div>
 		<div class="dialog"></div>
 	</aside>
-	
 </div>
+
 
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

@@ -28,17 +28,17 @@
 		am_name=session("admin_name")
 		dim status
 		if am_name="" and th_name<>"" then 
-		response.write("<a class='center_th_name'>"&th_name&"</a>")
+		response.write("<a class='center_th_name' title='个人中心'>"&th_name&"</a>")
 		status="th" 
 		else
 		if th_name ="" and am_name<>"" then 
-		response.write("<a class='center_am_name'>"&am_name&"</a>") 
+		response.write("<a class='center_am_name' title='后台管理'>"&am_name&"</a>") 
 		status="am"
 		else
 		if th_name<>"" and am_name<>"" then 
 		response.write("<script>alert('error!session未清除！')</script>")
 		else 
-		response.write("<a class='center_login'>登录</a>") 
+		response.write("<a class='center_login' title='点击登录'>登录</a>") 
 		status="login"
 		end if
 		end if
@@ -71,7 +71,7 @@
 	<select name="lab-address" id="lab-address" autocomplete="off">
 		<option value="0" selected>请选择实验室</option>
 	</select>
-		<select name="week-list" id="week-list" autocomplete="off">
+	<select name="week-list" id="week-list" autocomplete="off">
 		<option value="0" selected>请选择周次</option>
 		<% for i=1 to 20 %>
 		<option value=<%=i%>>第<%=i%>周</option>
@@ -89,9 +89,17 @@
 	<span class="msg msg-week"></span>
 	<div class="msg-time">当前周次：<sapn class="msg ">第<span class="msg-time-weeks"></span>周</sapn></div>
 </div>
+<div class="somelinks">
+	其它功能：
+	<a class="alink" href="asp/course-lab.asp" target="_blank">[当前各实验室支持课程]</a>|
+	|<a class="alink" href="asp/code-name-tab.asp" target="_blank">[课程名称与代码对应表]</a>|
+	|<a class="alink" href="asp/no-items.asp" target="_blank">[公告]</a>|
+	|<a class="alink" href="asp/am-info.asp" target="_blank">[管理员联系方式]</a>
+	<span class="now-time">日期：<span class="msg-time-all"></span></span>
+</div>		
 <section class="section-mid clearfix">
 	<aside class="side-left">
-		<div class="content-shadow"></div>
+		<div class="content-shadow"><img class="course_info" src="img/course_info.png" alt="实验支持课程对照表"><button class="ap_button" type="button" id="ap_open" title="打开/关闭对照表" ><i class="fa fa-chevron-left"></i></button>	</div>
 		<table class="table">
 			<tr><!-- 星期 -->
 				<th></th>
@@ -104,29 +112,28 @@
 				<th>星期六</th>
 				<th>星期日</th>
 			</tr>
-		<!-- 课时 -->
-		<% for i=1 to 13 %>
-		<tr value=<%=i%>>
-			<%if i=1 then%>
-				<th rowspan="5"">上午</th>
-			<% else if i=6 then %>
-				<th rowspan="4"">下午</th>
-			<% else if i=10 then %>
-				<th rowspan="4"">晚上</th>
-			<%
-			end if
-			end if
-			end if%>
+			<!-- 课时 -->
+			<% for i=1 to 13 %>
+			<tr value=<%=i%>>
+				<%if i=1 then%>
+					<th rowspan="5">上午</th>
+				<% else if i=6 then %>
+					<th rowspan="4">下午</th>
+				<% else if i=10 then %>
+					<th rowspan="4">晚上</th>
+				<%
+				end if
+				end if
+				end if%>
 
-			<th class='lesson'>第<%=i%>节</th>
-		<% for j=1 to 7 %>
-			<td value=<%=j%>></td>
-		<% next %>
+				<th class="lesson">第<%=i%>节</th>
+			<% for j=1 to 7 %>
+				<td value=<%=j%>></td>
+			<% next %>
 
-		</tr>
+			</tr>
 
-		<% next %>
-
+			<% next %>
 		</table>
 	</aside>
 <!--#include file="asp/aside.asp" -->

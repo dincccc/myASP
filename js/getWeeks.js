@@ -7,6 +7,7 @@ $(function(){
     var td = TodayInfo('2018-2-28',now)
     console.log(now+"||"+td.week);
     $(".msg-time-weeks").html(td.week); 
+    $(".msg-time-all").html(year+"年"+month+"月"+day+"日"); 
 })
 function TodayInfo(start,today) {
     var WEEKLEN = 7,

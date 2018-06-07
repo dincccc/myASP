@@ -118,7 +118,7 @@ nav{
 	border-radius: 4px;
 }
 
-.search,#apply,#ap_exit{
+.search,.ap_button{
 	height: 34px;
 	padding: 0 12px;
 	background: #fff;
@@ -149,7 +149,21 @@ nav{
 	width: 120px; 
 	color: #1fbaed;
 }
+.now-time{
+	color: #d1490a;
+	float: right;
+}
 /*end  msg-select */
+
+.somelinks{
+	text-align: center;
+	background: #e5e5e5;
+	padding: 4px 0;
+	font-size: 12px;
+}
+.alink:hover{
+	text-decoration: underline;
+}
 /* section-mid */
 .section-mid{
 	position: relative;
@@ -214,7 +228,17 @@ nav{
 	display: none;
 	background: rgba(0, 0, 0, 0.5);
 }
-
+.course_info{
+	display: none;
+	position: fixed;
+	left: 75px;
+}
+#ap_open{
+	display: none;
+	position: fixed;
+	right: 290px;
+	top: 137px;
+}
 /* aside */
 	#applypanel{
 		z-index: 1002;
@@ -245,7 +269,7 @@ nav{
 		justify-content: space-between;
 		border-top: 1px solid #1fbaed;
 	}
-	#apply,#ap_exit{
+	.ap_button{
 		text-align: center;
 		margin-top: 20px;
 		font-size: 16px;
@@ -254,16 +278,16 @@ nav{
 		background: #10374d;
 		border-color: #fff;
 	}
-	#apply span,#ap_exit span{
+	.ap_button span{
 		margin-right: 10px;
 	}
-	#apply:active,#ap_exit:active
+	.ap_button:active
 	{
 		background: #fff;
 		color: #10374d;
 		transition: all .1s linear;
 	}
-	#apply:hover,#ap_exit:hover
+	.ap_button:hover
 	{
 		border-color: #1fbaed;
 		transition: all .1s linear;

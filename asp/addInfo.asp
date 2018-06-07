@@ -4,7 +4,7 @@
 isfrom=request.QueryString("isfrom")
 
 'LabInfo'
-lab_id=request.QueryString("lab-id")
+'lab_id=request.QueryString("lab-id")
 lab_address=request.QueryString("lab-adr")
 lab_type_id=request.QueryString("lab-type")
 lab_capacity=request.QueryString("lab-cap")
@@ -21,7 +21,7 @@ th_mail=request.QueryString("th-mail")
 if isfrom="addLab" then
 	dim sqlLab,sql1,sql2
 	sql1="INSERT INTO lab_info (`lab_id`,`lab_type_id`,`lab_address`,`lab_capacity`) "
-	sql2="VALUES ('"&lab_id&"','"&lab_type_id&"','"&lab_address&"','"&lab_capacity&"')"
+	sql2="VALUES (default,'"&lab_type_id&"','"&lab_address&"','"&lab_capacity&"')"
 	sqlLab=sql1&sql2
 	call addInfo(sqlLab,"添加实验室信息")
 else

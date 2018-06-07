@@ -31,8 +31,8 @@ else
 	Email=rsMsg("th_mail")
 	mailTitle="实验室预约结果"
 	mailContent=th_name&"老师：您预约的第"&c_week&"周,星期"&c_day&",第"&c_lesson&"节课的实验室"&c_lab_address
-	mailContentP="预约成功！</br>"&mailContent&",预约成功了！"
-	mailContentJ="预约失败！</br>"&mailContent&",预约失败了！请选择合适教室重新预约！"
+	mailContentP="预约成功！</br>"&mailContent&",预约成功了！若有疑问请联系管理员！"
+	mailContentJ="预约失败！</br>"&mailContent&",预约失败了！请选择合适教室重新预约，若有疑问请联系管理员！"
 	if isfrom="amp"then
 		call ischeck(c_week,c_day,c_lesson,c_lab_address,1,check_by,check_date)
 		call sendMail(Email,mailTitle,mailContentP)

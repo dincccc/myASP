@@ -26,7 +26,7 @@ End If
 
 if rs.eof then
 %>
-<tr><td colspan="10">当前还没有预约记录，谢谢您的关注</td></tr>
+<tr><td colspan="11">当前还没有预约记录，<a href="../index.asp" class="link-a">点击返回预约</a></td></tr>
 <%
 else
 	rs.MoveFirst
@@ -63,9 +63,10 @@ do while not rs.eof and i<maxperpage
 	lab_address=rs("lab_address")
 	p_class=rs("class")
 	exp_name=rs("exp_name")
+	cur_name=rs("cur_name")
 	bk_date=rs("bk_date")
 	i=i+1
-	response.write "<tr><td>"&i&"</td><td>"&bk_week&"</td><td>"&bk_day&"</td><td>"&bk_lesson&"</td><td>"&lab_address&"</td><td>"&p_class&"</td><td>"&exp_name&"</td><td class='status'>"&bk_re_status&"</td><td>"&bk_date&"</td><td><i class='fa fa-"&btn_icon&" "&btn_icon&"'></i></td><td><i class='fa fa-minus-circle delete'></i></td></tr>"
+	response.write "<tr><td>"&i&"</td><td>"&bk_week&"</td><td>"&bk_day&"</td><td>"&bk_lesson&"</td><td>"&lab_address&"</td><td>"&p_class&"</td><td>"&cur_name&"||"&exp_name&"</td><td class='status'>"&bk_re_status&"</td><td>"&bk_date&"</td><td><i class='fa fa-"&btn_icon&" "&btn_icon&"'></i></td><td><i class='fa fa-minus-circle delete'></i></td></tr>"
 	rs.movenext
 	loop
 	rs.close

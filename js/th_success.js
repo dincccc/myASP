@@ -1,12 +1,27 @@
 ﻿$(".center_th_name").click(function(){
 	window.location.href="asp/teacher.asp";
 });/*登录|个人中心按钮*/
-$(".content-shadow").click(function(){
-	aside_hide();
-	return false;
-})
 
+
+	$("#ap_open").click(function(events){
+		var ap_className=$("#ap_open i").attr("class");
+		if(ap_className=="fa fa-chevron-left"){
+			$("img.course_info").show();
+			$("#ap_open i").removeClass().addClass("fa fa-times");
+			events.stopPropagation();	
+		}else{
+			$("img.course_info").hide();
+			$("#ap_open i").removeClass().addClass("fa fa-chevron-left");
+			events.stopPropagation();	
+		}
+	})	
+
+$(".content-shadow").click(function(events){
+	aside_hide();
+	events.stopPropagation();
+})
 $(".table td").click(function(){
+	var _this=$(this);
 	var chooseWeeks=$("#week-list option:selected").val();
 	var nowWeeks=parseInt($(".msg-time-weeks").html());
 	var contant=$(this).children().prop("class");
@@ -16,6 +31,8 @@ $(".table td").click(function(){
 		dialog("当前周次不能预约！");
 	}
 	else{
+
+
 		var x=$(this).attr("value");			/*td的value值*/
 		var y=$(this).parent().attr("value");	/*tr的value值*/
 
@@ -27,6 +44,8 @@ $(".table td").click(function(){
 		isChoose(ap_week_v,ap_address_v
 			,function(){
 				aside_data(ap_week_v,ap_address_h,x,y);
+				_this.css("background","#444");
+				var timer=setTimeout(function(){_this.css("background","#fff");}, 5000);	
 			}
 			,function(){dialog("请选择周次！")}
 			,function(){dialog("请选择实验室！")});

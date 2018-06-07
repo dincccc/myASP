@@ -1,3 +1,4 @@
+<!-- 管理员查询 预约记录 审核-->
 <!--#include file="conn.asp"-->
 <%
 dim rs,sqlstr
@@ -54,14 +55,17 @@ do while not rs.eof and i<maxperpage
 		end if
 	end if
 	i=i+1
+	th_id=rs("th_id")
 	bk_week=rs("bk_week")
 	bk_day=rs("bk_day")
 	bk_lesson=rs("bk_lesson")
 	lab_address=rs("lab_address")
 	p_class=rs("class")
 	exp_name=rs("exp_name")
+	cur_name=rs("cur_name")
 	bk_date=rs("bk_date")
-	response.write "<tr><td>"&i&"</td><td>"&bk_week&"</td><td>"&bk_day&"</td><td>"&bk_lesson&"</td><td>"&lab_address&"</td><td>"&p_class&"</td><td>"&exp_name&"</td><td class='status'>"&bk_re_status&"</td><td>"&bk_date&"</td><td><i class='fa fa-check reply'></i></td><td><i class='fa fa-times delete'></i></td></tr>"
+	bk_note=rs("bk_note")
+	response.write "<tr value="&th_id&" title=预约人ID："&th_id&"||备注："&bk_note&"><td>"&i&"</td><td>"&bk_week&"</td><td>"&bk_day&"</td><td>"&bk_lesson&"</td><td>"&lab_address&"</td><td>"&p_class&"</td><td>"&cur_name&"--"&exp_name&"</td><td class='status'>"&bk_re_status&"</td><td>"&bk_date&"</td><td><i class='fa fa-check reply'></i></td><td><i class='fa fa-times delete'></i></td></tr>"
 	rs.movenext
 	loop
 	rs.close

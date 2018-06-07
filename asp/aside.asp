@@ -57,9 +57,8 @@
 		<div><span>申请人:</span> <span class="ap_name"><%=th_name%></span></div>
 		<div><span>申请人ID:</span> <span class="ap_id"><%=userid%></span></div>
 		<div><span>申请日期：</span> <span class="ap_time"><%=date()%></span></div>
-		<button type="button" id="apply"> <span>申</span><span>请</span></button>
-		<button type="button" id="ap_exit"> <span>退</span><span>出</span></button>
+		<button class="ap_button" type="button" id="apply" > <span>申</span><span>请</span></button>
+		<button class="ap_button" type="button" id="ap_exit" > <span>退</span><span>出</span></button>
 	</div>
-
 </aside>
 

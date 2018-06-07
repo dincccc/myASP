@@ -1,4 +1,5 @@
-<!-- Nav tabs -->
+<!-- 实验室信息查询 -->
+<!-- #include file="conn.asp"-->
 <ul class="nav nav-tabs lab-info-tab">
     <%
     dim sql_labtype

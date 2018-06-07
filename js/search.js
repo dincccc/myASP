@@ -1,5 +1,20 @@
 ﻿$(function(){
-	getAddress();/*获取地址并调用createAddress进行创建*/
+	$("#lab-type option").each(function(index){
+		var _this=$(this);
+		_this.click(function(){
+			if(index==0){
+				$("#lab-address option").not("[value=0]").remove();	
+			}
+			else
+			{
+				$.ajax("search.asp?labtypeid="+index)
+				.done(function(data){
+					var arr=eval("("+data+")");
+					createAddress(arr,"lab-address")
+				})
+			}	
+		})
+	})	/*获取地址并调用createAddress进行创建*/
 	$(".center_login").click(function(){
 		window.location.href="asp/login.asp";
 	});	
@@ -55,24 +70,6 @@
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
 
-	/*获取地址并调用createAddress进行创建*/
-	function getAddress(){
-		$("#lab-type option").each(function(index){
-			var _this=$(this);
-			_this.click(function(){
-				if(index==0){
-					$("#lab-address option").not("[value=0]").remove();	
-				}else
-				{
-					$.ajax("search.asp?labtypeid="+index)
-					.done(function(data){
-						var arr=eval("("+data+")");
-						createAddress(arr,"lab-address")
-					})
-				}	
-			})
-		})	
-	}
 	/*创建实验室地址option*/
 	function createAddress(arr,ID){
 		var SECID=document.getElementById(ID);
@@ -125,7 +122,9 @@
 		$("aside#applypanel")
 		.stop(true,false)
 		.show()
-		.animate({"right": 0,},600);
+		.animate({"right": 0,},600,function(){
+			$("#ap_open").show();
+		});
 	}
 	/*aside隐藏*/
 	function aside_hide(){
@@ -137,7 +136,9 @@
 			function(){
 				$("aside#applypanel").hide();
 			});
-		$(".content-shadow").stop(true,true).animate({"opacity": 0,},100).hide();
+		$(".content-shadow").stop(true,true).animate({"opacity": 0,},100,function(){
+			$("img.course_info").hide();
+		}).hide();
 		$(".side-left").stop(true,false).animate({"left": 0,},600);
 	}
 	/*提示框*/

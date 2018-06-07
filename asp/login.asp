@@ -30,6 +30,8 @@
         <label for="remember">记住密码</label>
       </div>
       <div class="identify">
+        <input type="radio" id="vis" name="identify" value="0">
+        <label for="vis">游客</label>
         <input type="radio" id="th" name="identify" value="1">
         <label for="th">教师</label>
         <input type="radio" id="am" name="identify" value="2">

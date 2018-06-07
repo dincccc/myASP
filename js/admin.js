@@ -1,4 +1,8 @@
 
+/*返回首页*/
+$(".am-return").click(function(){
+	window.location.href="../index.asp";
+})
 //↓-----------------信息查询----------------------↓
 
 /*th_info*/
@@ -45,7 +49,7 @@ function addThInfo(){
 /*end add 教师信息*/
 /*add 实验室信息*/
 function addLabInfo(){
-	var lab_id=$("#new_lab_id").val();
+/*	var lab_id=$("#new_lab_id").val();*/
 	var lab_adr=$("#new_lab_adr").val();
 	var lab_type=$("#new_lab_type option:checked").attr("value");
 	var lab_cap=$("#new_lab_cap").val();
@@ -53,7 +57,7 @@ function addLabInfo(){
 	$.ajax({
 		url: "addInfo.asp",
 		data: {
-			"lab-id": lab_id,
+/*			"lab-id": lab_id,*/
 			"lab-adr": lab_adr,
 			"lab-type": lab_type,
 			"lab-cap": lab_cap,
@@ -112,7 +116,25 @@ $(function(){
 	})
 })
 /*end 表单验证*/
+/*修改实验室信息*/
 
+	function setValue(labId,labTypeId,labCap){
+		$("#change_lab_id").attr("value",labId);
+		$("#change_lab_type option[value="+labTypeId+"]").attr("selected",true);
+		$("#change_lab_cap").val(labCap);
+	}
+	$("#change_lab_submit").click(function(){
+		var lab_id=$("#change_lab_id").val();
+		var lab_type_id=$("#change_lab_type option:selected").attr("value");
+		var lab_capacity=$("#change_lab_cap").val();
+		$.get("changeLabInfo.asp",
+			{"lab-id":lab_id,"lab-type-id":lab_type_id,"lab-cap": lab_capacity, },
+			function(data){
+				dialog(data);
+			})
+	})
+
+/*end 修改实验室信息*/
 //↑-----------------添加信息----------------------↑
 
 //↓-----------------预约管理----------------------↓
@@ -170,64 +192,7 @@ $(function(){
 /*end 状态颜色*/
 
 /*审核按钮*/
-	/*批准*/
-$(function(){	
-	$(".reply").click(function(){
-		getDate();
-		var msgP=confirm("确定批准吗？");
-		if(msgP==true){
-			var theNode=$(this).parent().parent();
-			var check_by=$(".get_am_id").attr("value");
-			checkBtn(theNode,"amp",check_by);
-			console.log(check_by);
-		}else{
-			console.log("Pnothing");
-		}
-	})
-	/*拒绝*/
-	$(".delete").click(function(){
-		getDate();
-		var msgJ=confirm("确定拒绝吗？");
-		if(msgJ==true){
-			var theNode=$(this).parent().parent();
-			var check_by=$(".get_am_id").attr("value");
-			checkBtn(theNode,"amj",check_by)
-		}else{
-			console.log("Jnothing");
-		}
-	})
-})
-/*end 审核按钮*/
 
-/*审核按钮事件*/
-	function checkBtn(theNode,isfrom,check_by){
-		var c_week=theNode.children().eq(1).text();
-		var c_day=theNode.children().eq(2).text();
-		var c_lesson=theNode.children().eq(3).text();
-		var c_lab_address=theNode.children().eq(4).text();
-		var c_thId=theNode.attr("value");
-		theNode.hide("fast",function(){
-			theNode.remove();	
-			$.ajax({
-				url: "ischeck-del.asp",
-				type: "POST",
-				data: {
-					"week": c_week,
-					"day": c_day,
-					"lesson": c_lesson,
-					"lab-address": c_lab_address,
-					"check-by": check_by,
-					"now": now,
-					"isfrom": isfrom,
-					"th-id": c_thId,
-				}
-			}).done(function(){
-				console.log("success");
-			}).fail(function(){
-				console.log("filed");
-			})		
-		})
-	}
 /*end 审核按钮事件*/
 
 //↑-----------------预约管理----------------------↑
