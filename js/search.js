@@ -1,4 +1,5 @@
 ﻿$(function(){
+
 	$("#lab-type option").each(function(index){
 		var _this=$(this);
 		_this.click(function(){
@@ -54,6 +55,10 @@
 		var msg_week_h="第"+msg_week_v+"周"
 		msgCheck(".msg-week",msg_week_v,msg_week_h);
 	}
+/*	$(".table td").click(function(){
+		var _this=$(this);
+		_this.html("班级： 测试班级"+"</br>"+ "占用原因：系统测试"+"</br>"+"预约人：测试人"+"</br>");
+	})*/
 	$(".table td").hover(function(){
 		var _this=$(this);
 		if(_this.html()==""){
